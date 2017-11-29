@@ -1,10 +1,10 @@
 {
-  "name": "webui",
+  "name": "dispo-admin",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000/",
-  "homepage": "/ui/",
   "dependencies": {
+    "dispo-api": "git+https://c292397db9ed2e7469547a17ed27769c9b50a535:x-oauth-basic@github.com/chipp972/dispo-api.git",
     "material-ui": "1.0.0-beta.21",
     "material-ui-icons": "1.0.0-beta.17",
     "react": "^16.0.0",
@@ -16,9 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "rm -rf ../public ",
     "build": "react-scripts build",
-    "postbuild": "cp -R build ../public && rm -rf build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
