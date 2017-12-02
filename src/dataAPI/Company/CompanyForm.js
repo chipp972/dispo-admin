@@ -2,22 +2,21 @@
 import React from 'react';
 import type {
   Company,
-  CompanyData
-} from '../../../../src/api/company/company.type.js';
-import type { CompanyType } from '../../../../src/api/companytype/companytype.type';
-import type { User } from '../../../../src/api/user/user.type';
-import type { CrudOperations } from '../../api/api';
+  CompanyData,
+CompanyType,
+User, DataAPI
+} from 'dispo-api';
 import Form from '../Form/Form';
 import type { InputDescription } from '../Form/Form';
 
 type CompanyFormProps = {
   companyTypes: CompanyType[],
   users: User[],
-  companyOperations: CrudOperations<CompanyData, Company>,
+  dataAPI: DataAPI,
   companiesRefresh: Function
 };
 
-const initialState = {
+const initialState: CompanyData = {
   owner: '',
   name: 'company01',
   type: '',
@@ -49,10 +48,10 @@ const CompanyForm = (props: CompanyFormProps) => (
         label: type.name
       }))
     }}
-    onSubmit={(formData) => {
-      props.companyOperations
+    onSubmit={(formData: CompanyData) => {
+      props.dataAPI.company
         .create(formData)
-        .then((res) => console.log(res))
+        .then((res: Company) => console.log(res))
         .then(() => props.companiesRefresh())
         .catch((err) => console.log(err));
     }}

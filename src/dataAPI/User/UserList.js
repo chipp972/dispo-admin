@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { List, ListItem, ListItemText } from 'material-ui';
-import type { User } from '../../../../src/api/user/user.type.js';
+import type { User } from 'dispo-api';
 
 type CompanyTypeListProps = {
   users: User[]

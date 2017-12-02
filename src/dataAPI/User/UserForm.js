@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
-import type { User, UserData } from '../../../../src/api/user/user.type';
+import type { DataAPI, UserData } from 'dispo-api';
 import Form from '../Form/Form';
 import type { InputDescription } from '../Form/Form';
-import type { CrudOperations } from '../../api/api';
 
 const inputs: InputDescription[] = [
   { id: 'email', label: 'Adresse e-mail', type: 'text' },
@@ -15,25 +14,27 @@ const inputs: InputDescription[] = [
   { id: 'address', label: 'Adresse', type: 'text' }
 ];
 
+const initialState: UserData = {
+  email: '',
+  password: '',
+  lastName: '',
+  firstName: '',
+  birthDate: '1995-01-01',
+  phoneNumber: '06',
+  address: ''
+};
+
 type UserFormProps = {
   usersRefresh: Function,
-  userOperations: CrudOperations<UserData, User>
+  dataAPI: DataAPI
 };
 
 const UserForm = (props: UserFormProps) => (
   <Form
-    initialState={{
-      email: '',
-      password: '',
-      lastName: '',
-      firstName: '',
-      birthDate: '1995-01-01',
-      phoneNumber: '06',
-      address: ''
-    }}
+    initialState={initialState}
     inputs={inputs}
     onSubmit={(formData) => {
-      props.userOperations
+      props.dataAPI.user
         .create(formData)
         .then((res) => console.log(res))
         .then(() => props.usersRefresh())

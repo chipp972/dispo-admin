@@ -1,27 +1,23 @@
 // @flow
 import React from 'react';
-import type {
-  CompanyType,
-  CompanyTypeData
-} from '../../../../src/api/companytype/companytype.type';
-import type { CrudOperations } from '../../api/api';
+import type { CompanyType, CompanyTypeData, DataAPI } from 'dispo-api';
 import Form from '../Form/Form';
 
 type CompanyTypeFormProps = {
-  companyTypeOperations: CrudOperations<CompanyTypeData, CompanyType>,
+  dataAPI: DataAPI,
   companyTypesRefresh: Function
 };
 
+const initialState: CompanyTypeData = { name: '' };
+
 const CompanyTypeForm = (props: CompanyTypeFormProps) => (
   <Form
-    initialState={{ name: '' }}
-    inputs={
-  [{ id: 'name', label: 'Type d\'entreprise', type: 'text' }]
-}
+    initialState={initialState}
+    inputs={[{ id: 'name', label: "Type d'entreprise", type: 'text' }]}
     onSubmit={(formData) => {
-      props.companyTypeOperations
+      props.dataAPI.companyType
         .create(formData)
-        .then((res) => console.log(res))
+        .then((res: CompanyType) => console.log(res))
         .then(() => props.companyTypesRefresh())
         .catch((err) => console.log(err));
     }}

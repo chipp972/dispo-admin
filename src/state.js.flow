@@ -1,0 +1,6 @@
+// @flow
+import type { SocketIO } from 'socket.io-client';
+
+export type State = {
+  socket: SocketIO,
+}
