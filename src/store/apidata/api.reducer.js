@@ -1,29 +1,33 @@
 // @flow
 import { addToState, convertToMap, removeFromState } from './api.helper';
 import type { APIDataState } from './api.js.flow';
+import { append, drop } from 'ramda';
 
 const initialState: APIDataState = {
   company: { list: [], byId: {} },
   companytype: { list: [], byId: {} },
   user: { list: [], byId: {} },
-  hasError: false
+  errorList: []
 };
 
 export const apiDataReducer = (
   state: APIDataState = initialState,
   action: any
 ) => {
-  const re = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(action.type);
-  if (!re || re.length < 4) return state;
-  const [, actionType, modelName, isSuccess] = re;
-  const name = modelName.toLowerCase();
-  console.log(actionType, name, isSuccess);
-  (actionType: 'GETALL' | 'GET' | 'CREATE' | 'EDIT' | 'REMOVE');
-  if (!isSuccess) {
+  if (action.type === 'HIDE_ERROR_MESSAGE') {
     return {
       ...state,
-      hasError: true,
-      error: action.error
+      errorList: drop(1, state.errorList)
+    };
+  }
+  const re = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(action.type);
+  if (!re || re.length < 4) return state;
+  const [, actionType, modelName, status] = re;
+  const name = modelName.toLowerCase();
+  if (status === 'FAILURE') {
+    return {
+      ...state,
+      errorList: append(action.error.message, state.errorList)
     };
   }
   switch (actionType) {
@@ -33,8 +37,7 @@ export const apiDataReducer = (
         [name]: {
           list: action.payload,
           byId: convertToMap(action.payload)
-        },
-        hasError: false
+        }
       };
     case 'GET':
     case 'CREATE':

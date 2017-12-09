@@ -5,7 +5,7 @@ import {
   authenticate,
   retrieveToken
 } from '../store/authentication/authentication.action';
-import { LoginScreen } from './AdminLogin/LoginScreen';
+import { LoginScreen } from '../components/AdminLogin/LoginScreen';
 
 const mapStateToProps = (state, ownProps) => ({
   email: state.authentication.email,

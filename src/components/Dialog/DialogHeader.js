@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';

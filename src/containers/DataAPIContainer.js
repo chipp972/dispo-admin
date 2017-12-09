@@ -1,12 +1,12 @@
 // @flow
 import { connect } from 'react-redux';
-import { UserDialog } from './User/UserDialog';
-import { CompanyTypeDialog } from './CompanyType/CompanyTypeDialog';
-import { CompanyDialog } from './Company/CompanyDialog';
+import { UserDialog } from '../components/User/UserDialog';
+import { CompanyTypeDialog } from '../components/CompanyType/CompanyTypeDialog';
+import { CompanyDialog } from '../components/Company/CompanyDialog';
 import { crud } from '../store/apidata/api.action';
-import { UserList } from './User/UserList';
-import { CompanyTypeList } from './CompanyType/CompanyTypeList';
-import { CompanyList } from './Company/CompanyList';
+import { UserList } from '../components/User/UserList';
+import { CompanyTypeList } from '../components/CompanyType/CompanyTypeList';
+import { CompanyList } from '../components/Company/CompanyList';
 
 const mapStateToProps = (state, ownProps) => ({
   token: state.authentication.token,

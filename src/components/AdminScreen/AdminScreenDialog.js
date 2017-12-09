@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { UserDialog } from '../../dataAPI/User/UserDialog';
-import { CompanyDialog } from '../../dataAPI/Company/CompanyDialog';
-import { CompanyTypeDialog } from '../../dataAPI/CompanyType/CompanyTypeDialog';
+import { UserDialog } from '../User/UserDialog';
+import { CompanyDialog } from '../Company/CompanyDialog';
+import { CompanyTypeDialog } from '../CompanyType/CompanyTypeDialog';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import { compose, nth, prop } from 'ramda';

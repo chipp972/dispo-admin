@@ -1,14 +1,23 @@
 // @flow
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { LoginScreenWithAuth } from '../../authentication/LoginContainer';
-import { AdminScreenWithState } from '../../adminUI/AdminUIContainer';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { LoginScreenWithAuth } from '../../containers/LoginContainer';
+import { AdminScreenWithState } from '../../containers/AdminUIContainer';
 
-type RouterProps = {};
+type RouterProps = {
+  isAuthenticated: boolean
+};
 
-export const Router = (props: RouterProps) => (
-  <Switch>
-    <Route exact path="/" component={AdminScreenWithState} />
-    <Route path="/login" component={LoginScreenWithAuth} />
-  </Switch>
-);
+export const Router = (props: RouterProps) => {
+  return props.isAuthenticated ? (
+    <Switch>
+      <Route path="/" component={AdminScreenWithState} />
+      <Redirect to="/" />
+    </Switch>
+  ) : (
+    <Switch>
+      <Route path="/login" component={LoginScreenWithAuth} />
+      <Redirect to="/login" />
+    </Switch>
+  );
+};

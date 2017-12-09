@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
+import { HeaderContainer } from '../../containers/HeaderContainer';
+import { RouterContainer } from '../../containers/RouterContainer';
+import {ErrorContainer} from '../../containers/ErrorContainer';
 import './App.css';
-import { Header } from '../Header/Header';
-import { Router } from '../Router/Router';
 
 type AppProps = {};
 
@@ -15,7 +16,8 @@ export const App = (props: AppProps) => (
       minHeight: '98vh'
     }}
   >
-    <Header isAuthenticated={false} title="Panneau d'administration" />
-    <Router />
+    <HeaderContainer />
+    <RouterContainer />
+    <ErrorContainer />
   </div>
 );

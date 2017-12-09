@@ -2,18 +2,21 @@
 import type { Company, User, CompanyType } from 'dispo-api';
 
 export type APIDataState = {
+  [string]: {
+    list: any[],
+    byId?: { [string]: any }
+  },
   company: {
     list: Company[],
     byId?: { [string]: Company }
   },
   companytype: {
     list: CompanyType[],
-    ById?: { [string]: CompanyType }
+    byId?: { [string]: CompanyType }
   },
   user: {
     list: User[],
-    ById?: { [string]: User }
+    byId?: { [string]: User }
   },
-  hasError: boolean,
-  error?: Error
+  errorList: string[]
 };

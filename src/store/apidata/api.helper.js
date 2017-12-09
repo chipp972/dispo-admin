@@ -1,11 +1,29 @@
 // @flow
-import { filter, compose, append, reduce, curry, not, propEq } from 'ramda';
+import { filter, compose, append, reduce, curry } from 'ramda';
 import type { APIDataState } from './api.js.flow';
 
-const filterOutById = curry((obj: any, objList: any[]) =>
-  filter(not(propEq('_id', obj._id)))(objList)
+/**
+ * filter objects by id
+ */
+export const filterOutById = curry((obj: any, objList: any[]) =>
+  filter((o) => o._id !== obj._id)(objList)
 );
 
+/**
+ * convert array to map with _id as keys
+ */
+export const convertToMap = reduce(
+  (acc, obj) => ({ ...acc, [obj._id]: obj }),
+  {}
+);
+
+/**
+ * add an object in the state
+ * @param {any} obj CRUD object
+ * @param {string} modelName
+ * @param {APIDataState} state
+ * @return {APIDataState}
+ */
 export const addToState = (
   obj: { _id: string, [string]: any },
   modelName: string,
@@ -19,13 +37,7 @@ export const addToState = (
       [obj._id]: obj
     }
   },
-  hasError: false
 });
-
-export const convertToMap = reduce(
-  (obj, acc) => ({ ...acc, [obj._id]: obj }),
-  {}
-);
 
 /**
  * delete the object from the state
@@ -42,10 +54,6 @@ export const removeFromState = (
   ...state,
   [modelName]: {
     list: filterOutById(obj)(state[modelName].list),
-    byId: {
-      ...state[modelName].byId,
-      [obj._id]: undefined
-    }
+    byId: filterOutById(obj)(state[modelName].byId)
   },
-  hasError: false
 });

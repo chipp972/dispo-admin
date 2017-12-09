@@ -7,9 +7,9 @@ import { TabContainer } from '../../components/Nav/TabContainer';
 import BuisinessIcon from 'material-ui-icons/Business';
 import WorkIcon from 'material-ui-icons/Work';
 import FaceIcon from 'material-ui-icons/Face';
-import { UserList } from '../../dataAPI/User/UserList';
-import { CompanyList } from '../../dataAPI/Company/CompanyList';
-import { ConnectedCompanyTypeList } from '../../dataAPI/DataAPIContainer';
+import { UserList } from '../User/UserList';
+import { CompanyList } from '../Company/CompanyList';
+import { ConnectedCompanyTypeList } from '../../containers/DataAPIContainer';
 import { AdminScreenDialog } from './AdminScreenDialog';
 
 const tabs = [
