@@ -1,6 +1,10 @@
 // @flow
 import { connect } from 'react-redux';
-import { sendCode, authenticate, retrieveToken } from './authentication.action';
+import {
+  sendCode,
+  authenticate,
+  retrieveToken
+} from '../store/authentication/authentication.action';
 import { LoginScreen } from './AdminLogin/LoginScreen';
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,15 +1,18 @@
 // @flow
 import React from 'react';
 import { List, ListItem, ListItemText } from 'material-ui';
-import type { CompanyType } from '../../../../src/api/companytype/companytype.type.js';
+import type { CompanyType } from 'dispo-api';
 
 type CompanyTypeListProps = {
-  companyTypes: CompanyType[]
+  companytype: {
+    list: CompanyType[],
+    byId: { [id: string]: CompanyType }
+  }
 };
 
-const CompanyTypeList = (props: CompanyTypeListProps) => (
+export const CompanyTypeList = (props: CompanyTypeListProps) => (
   <List>
-    {props.companyTypes.map((companyType) => (
+    {props.companytype.list.map((companyType) => (
       <ListItem button key={companyType._id}>
         <ListItemText primary={companyType.name} />
       </ListItem>
@@ -17,4 +20,3 @@ const CompanyTypeList = (props: CompanyTypeListProps) => (
   </List>
 );
 
-export default CompanyTypeList;

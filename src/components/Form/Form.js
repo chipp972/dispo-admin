@@ -1,7 +1,7 @@
 // @flow
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component } from 'react';
 import { FormControl, FormHelperText, Button } from 'material-ui';
-import FormInput from './FormInput';
+import { FormInput } from './FormInput';
 
 export type InputDescription = {
   id: string,
@@ -11,7 +11,7 @@ export type InputDescription = {
   disabled?: boolean
 };
 
-type FormProps<T> = {
+export type FormProps<T> = {
   initialState: T,
   inputs: InputDescription[],
   onSubmit: (formData: any) => any,
@@ -21,13 +21,13 @@ type FormProps<T> = {
   }
 };
 
-export default class Form<T> extends Component<FormProps<T>, *> {
+export class Form<T> extends Component<FormProps<T>, *> {
   constructor(props: any) {
     super(props);
     this.state = props.initialState;
   }
 
-  handleInputChange = (name: string) => (event: SyntheticEvent) => {
+  handleInputChange = (name: string) => (event: SyntheticEvent<*>) => {
     const value =
       event.target.type === 'checkbox'
         ? event.target.checked
@@ -65,6 +65,7 @@ export default class Form<T> extends Component<FormProps<T>, *> {
         <Button
           raised
           color="primary"
+          style={{ padding: 10 }}
           onClick={() => this.props.onSubmit(this.state)}
         >
           {this.props.onSubmitLabel}

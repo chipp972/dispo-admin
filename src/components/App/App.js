@@ -7,8 +7,15 @@ import { Router } from '../Router/Router';
 type AppProps = {};
 
 export const App = (props: AppProps) => (
-  <div style={{ textAlign: 'center' }}>
-    <Header isAuthenticated={false} />
+  <div
+    style={{
+      display: 'flex',
+      flexFlow: 'column wrap',
+      textAlign: 'center',
+      minHeight: '98vh'
+    }}
+  >
+    <Header isAuthenticated={false} title="Panneau d'administration" />
     <Router />
   </div>
 );

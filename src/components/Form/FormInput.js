@@ -3,13 +3,13 @@ import React from 'react';
 import { Select, InputLabel, MenuItem, Input, TextField } from 'material-ui';
 import type { InputDescription } from './Form';
 
-interface FormInputProps extends InputDescription {
+export interface FormInputProps extends InputDescription {
   selectOptions: Array<{ _id: string, label: string }>;
   handleInputChange: string => any;
   value: string;
 }
 
-const FormInput = ({
+export const FormInput = ({
   id,
   label,
   type,
@@ -50,5 +50,3 @@ const FormInput = ({
       );
   }
 };
-
-export default FormInput;

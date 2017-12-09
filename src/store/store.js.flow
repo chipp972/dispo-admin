@@ -1,0 +1,19 @@
+// @flow
+import type { SocketIO } from 'socket.io-client';
+import type { Action } from 'redux';
+import type { AuthenticationState } from './authentication/authentication.js.flow';
+import type { AdminUIState } from './adminui/adminui.js.flow';
+import type { APIDataState } from './apidata/api.js.flow';
+
+// import type { SocketIO } from 'socket.io-client';
+
+export type State = {
+  socket: SocketIO,
+  authentication: AuthenticationState,
+  adminui: AdminUIState,
+  apiData: APIDataState
+};
+
+type GetState = () => State;
+type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+type Dispatch = (action: Action | ThunkAction) => any;

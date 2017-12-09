@@ -6,10 +6,8 @@ type TabContainerProps = {
   dir: string
 };
 
-const TabContainer = ({ children, dir }: TabContainerProps) => (
+export const TabContainer = ({ children, dir }: TabContainerProps) => (
   <div dir={dir} style={{ padding: 8 * 3 }}>
     {children}
   </div>
 );
-
-export default TabContainer;

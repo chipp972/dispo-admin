@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import type { DataAPI, UserData } from 'dispo-api';
-import Form from '../Form/Form';
-import type { InputDescription } from '../Form/Form';
+import { Form } from '../../components/Form/Form';
+import type { UserData } from 'dispo-api';
+import type { InputDescription } from '../../components/Form/Form';
 
 const inputs: InputDescription[] = [
   { id: 'email', label: 'Adresse e-mail', type: 'text' },
@@ -14,7 +14,7 @@ const inputs: InputDescription[] = [
   { id: 'address', label: 'Adresse', type: 'text' }
 ];
 
-const initialState: UserData = {
+const defaultState: UserData = {
   email: '',
   password: '',
   lastName: '',
@@ -25,23 +25,18 @@ const initialState: UserData = {
 };
 
 type UserFormProps = {
-  usersRefresh: Function,
-  dataAPI: DataAPI
+  initialState?: UserData,
+  isNew: boolean,
+  submitAction: (formData: UserData) => any
 };
 
-const UserForm = (props: UserFormProps) => (
+export const UserForm = (props: UserFormProps) => (
   <Form
-    initialState={initialState}
+    initialState={props.initialState || defaultState}
     inputs={inputs}
-    onSubmit={(formData) => {
-      props.dataAPI.user
-        .create(formData)
-        .then((res) => console.log(res))
-        .then(() => props.usersRefresh())
-        .catch((err) => console.log(err));
-    }}
-    onSubmitLabel="CREER UN UTILISATEUR"
+    onSubmit={props.submitAction}
+    onSubmitLabel={
+      props.isNew ? 'CREER UN UTILISATEUR' : 'MODIFIER UN UTILISATEUR'
+    }
   />
 );
-
-export default UserForm;

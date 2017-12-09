@@ -1,0 +1,10 @@
+// @flow
+export type AdminUIState = {
+  +isMobileViewport: boolean,
+  +currentTabIndex: number,
+  +isUserDialogOpen: boolean,
+  +isCompanyTypeDialogOpen: boolean,
+  +isCompanyDialogOpen: boolean,
+  +isNew: boolean,
+  +dialogContent?: any
+};

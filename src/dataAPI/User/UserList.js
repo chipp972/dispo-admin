@@ -7,7 +7,7 @@ type CompanyTypeListProps = {
   users: User[]
 };
 
-const UserList = (props: CompanyTypeListProps) => (
+export const UserList = (props: CompanyTypeListProps) => (
   <List>
     {props.users.map((user: User) => (
       <ListItem button key={user._id}>
@@ -19,5 +19,3 @@ const UserList = (props: CompanyTypeListProps) => (
     ))}
   </List>
 );
-
-export default UserList;

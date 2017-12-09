@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
+import { Form } from '../../components/Form/Form';
 import type { CompanyType, CompanyTypeData, DataAPI } from 'dispo-api';
-import Form from '../Form/Form';
 
 type CompanyTypeFormProps = {
   dataAPI: DataAPI,
@@ -10,7 +10,7 @@ type CompanyTypeFormProps = {
 
 const initialState: CompanyTypeData = { name: '' };
 
-const CompanyTypeForm = (props: CompanyTypeFormProps) => (
+export const CompanyTypeForm = (props: CompanyTypeFormProps) => (
   <Form
     initialState={initialState}
     inputs={[{ id: 'name', label: "Type d'entreprise", type: 'text' }]}
@@ -24,5 +24,3 @@ const CompanyTypeForm = (props: CompanyTypeFormProps) => (
     onSubmitLabel="CREER UN TYPE D'ENTREPRISE"
   />
 );
-
-export default CompanyTypeForm;

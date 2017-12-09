@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
+import { Form } from '../../components/Form/Form';
+import type { InputDescription } from '../../components/Form/Form';
 import type {
   Company,
   CompanyData,
-CompanyType,
-User, DataAPI
+  CompanyType,
+  User,
+  DataAPI
 } from 'dispo-api';
-import Form from '../Form/Form';
-import type { InputDescription } from '../Form/Form';
 
 type CompanyFormProps = {
   companyTypes: CompanyType[],
@@ -16,7 +17,7 @@ type CompanyFormProps = {
   companiesRefresh: Function
 };
 
-const initialState: CompanyData = {
+export const initialState: CompanyData = {
   owner: '',
   name: 'company01',
   type: '',
@@ -37,7 +38,7 @@ const inputs: InputDescription[] = [
   { id: 'phoneNumber', label: 'Numero de telephone', type: 'text' }
 ];
 
-const CompanyForm = (props: CompanyFormProps) => (
+export const CompanyForm = (props: CompanyFormProps) => (
   <Form
     initialState={initialState}
     inputs={inputs}
@@ -58,5 +59,3 @@ const CompanyForm = (props: CompanyFormProps) => (
     onSubmitLabel="CREER UNE ENTREPRISE"
   />
 );
-
-export default CompanyForm;

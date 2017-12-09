@@ -1,0 +1,42 @@
+// @flow
+import type { PasswordLessStartRes, AuthRes } from 'dispo-api';
+
+export type AuthenticationState = {
+  +email: string,
+  +code: string,
+  +token?: string,
+  +tokenId?: string,
+  +expireAt?: Date,
+  +error?: Error,
+  +isAuthenticated: boolean
+};
+
+export type SendCodeSuccessAction = {
+  type: 'SEND_CODE_SUCCESS',
+  payload: PasswordLessStartRes
+};
+
+export type AuthenticateAction =
+  | { type: 'AUTHENTICATE_SUCCESS', payload: AuthRes }
+  | { type: 'RETRIEVE_TOKEN_SUCCESS', payload: AuthRes }
+  | { type: 'TOKEN_REFRESH_SUCCESS', payload: AuthRes };
+
+export type ApiCommunicationFailure =
+  | { type: 'SEND_CODE_FAILURE', error: Error }
+  | { type: 'AUTHENTICATE_FAILURE', error: Error }
+  | { type: 'TOKEN_REFRESH_FAILURE', error: Error };
+
+export type TokenRetrievalAction =
+  | { type: 'INVALID_OR_EXPIRED_TOKEN' }
+  | { type: 'RETRIEVE_TOKEN_FAILURE', error: Error };
+
+export type StoreTokenAction =
+  | { type: 'STORE_TOKEN_SUCCESS' }
+  | { type: 'STORE_TOKEN_FAILURE', error: Error };
+
+export type AuthenticationAction =
+  | SendCodeSuccessAction
+  | AuthenticateAction
+  | TokenRetrievalAction
+  | StoreTokenAction
+  | ApiCommunicationFailure;

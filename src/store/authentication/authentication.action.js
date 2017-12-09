@@ -1,20 +1,29 @@
 // @flow
 import { authAPI } from 'dispo-api';
-import env from '../env';
-import type { AuthenticationAction } from './authentication.js.flow';
-import { AuthRes, PasswordLessStartRes } from 'dispo-api';
-import type { Dispatch } from 'redux';
+import env from '../../env';
+import type { AuthRes, PasswordLessStartRes } from 'dispo-api';
+import type {
+  StoreTokenAction,
+  AuthenticationAction,
+  AuthenticationState
+} from './authentication.js.flow';
+
+type GetState = () => AuthenticationState;
+type ThunkAction<A> = (dispatch: Dispatch<A>, getState: GetState) => any;
+type Dispatch<A> = (action: A | ThunkAction<*>) => any;
 
 const fetcher = authAPI(fetch, env.api.url);
 
-export const storeToken = ({ token, tokenId, expireAt }: AuthRes) => async (
-  dispatch: Dispatch
-) => {
+export const storeToken: ThunkAction<StoreTokenAction> = ({
+  token,
+  tokenId,
+  expireAt
+}: AuthRes) => async (dispatch: Dispatch<StoreTokenAction>) => {
   try {
     localStorage.setItem('TOKEN', token);
     localStorage.setItem('TOKEN_ID', tokenId);
     localStorage.setItem('EXPIRE_AT', expireAt);
-    return dispatch({ type: 'TOKEN_STORED' });
+    return dispatch({ type: 'STORE_TOKEN_SUCCESS' });
   } catch (error) {
     return dispatch({ type: 'STORE_TOKEN_FAILURE', error });
   }

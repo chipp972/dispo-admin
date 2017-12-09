@@ -28,7 +28,6 @@ export const LoginScreen = (props: LoginScreenProps) => {
       />
     );
   } else {
-    props.retrieveToken();
     return (
       <LoginForm sendCode={props.sendCode} />
     );
