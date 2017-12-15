@@ -20,6 +20,7 @@ const generateCrudAction = (operation: string, dataName: string) => {
     try {
       const { authentication } = getState();
       const { token } = authentication;
+      console.log(data);
       const res = await fetcher(token)[dataName][operation](...data);
       dispatch({
         type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_SUCCESS`,

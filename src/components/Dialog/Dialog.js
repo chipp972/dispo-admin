@@ -10,7 +10,6 @@ const Transition = (props) => <Slide direction="up" {...props} />;
 type DialogProps = {
   isMobileViewport: boolean,
   title: string,
-  mainActionLabel: string,
   Content: ElementType,
   contentProps: any,
   isDialogOpen: boolean,
@@ -21,7 +20,6 @@ type DialogProps = {
 export const Dialog = ({
   isMobileViewport,
   title,
-  mainActionLabel,
   Content,
   contentProps,
   isDialogOpen,
@@ -37,7 +35,6 @@ export const Dialog = ({
     <DialogHeader
       isMobileViewport={isMobileViewport}
       title={title}
-      mainActionLabel={mainActionLabel}
       handleError={handleError}
       closeDialog={closeDialog}
     />

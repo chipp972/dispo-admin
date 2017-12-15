@@ -42,12 +42,3 @@ export const initApp = (appStore: Store) => {
   });
 };
 
-// TODO: TO DELETE
-setTimeout(() => {
-  crud.companyType
-    .getAll({
-      name: 'plombier'
-    })(console.log, store.getState)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-}, 3000);

@@ -2,6 +2,7 @@
   "parser": "babylon",
   "printWidth": 80,
   "bracketSpacing": true,
+  "array-parens": "always",
   "jsxBracketSameLine": false,
   "semi": true,
   "tabWidth": 2,

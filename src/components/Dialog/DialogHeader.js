@@ -9,8 +9,6 @@ import CloseIcon from 'material-ui-icons/Close';
 type DialogHeaderProps = {
   isMobileViewport: boolean,
   title: string,
-  mainActionLabel: string,
-  mainAction?: () => any,
   handleError: (err: Error) => any,
   closeDialog: () => any
 };

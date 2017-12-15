@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { LoginScreenWithAuth } from '../../containers/LoginContainer';
+import { LoginContainer } from '../../containers/login/LoginContainer';
 import { AdminScreenWithState } from '../../containers/AdminUIContainer';
 
 type RouterProps = {
@@ -16,7 +16,7 @@ export const Router = (props: RouterProps) => {
     </Switch>
   ) : (
     <Switch>
-      <Route path="/login" component={LoginScreenWithAuth} />
+      <Route path="/login" component={LoginContainer} />
       <Redirect to="/login" />
     </Switch>
   );

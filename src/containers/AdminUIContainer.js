@@ -5,7 +5,7 @@ import {
   openDialog,
   closeDialog
 } from '../store/adminui/adminui.action';
-import { AdminScreen } from '../components/AdminScreen/AdminScreen';
+import { AdminScreen } from '../screens/AdminScreen';
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.authentication.isAuthenticated,
