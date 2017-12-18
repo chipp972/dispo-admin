@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
 import { Dialog } from '../../components/Dialog/Dialog';
-import { UserForm } from './UserForm';
+import { ConnectedUserForm } from '../../containers/user/UserFormContainer';
 import type { User } from 'dispo-api';
 
 type UserDialogProps = {
-  isNew: boolean,
   isMobileViewport: boolean,
   isDialogOpen: boolean,
   closeDialog: () => any,
@@ -15,14 +14,13 @@ type UserDialogProps = {
 
 export const UserDialog = (props: UserDialogProps) => (
   <Dialog
-    isNew={props.isNew}
     isMobileViewport={props.isMobileViewport}
     isDialogOpen={props.isDialogOpen}
     closeDialog={props.closeDialog}
     title="UTILISATEUR"
     mainActionLabel="CREER"
     handleError={props.handleError}
-    Content={UserForm}
+    Content={ConnectedUserForm}
     contentProps={{ initialState: props.user }}
   />
 );

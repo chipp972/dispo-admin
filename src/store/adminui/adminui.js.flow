@@ -5,6 +5,6 @@ export type AdminUIState = {
   +isUserDialogOpen: boolean,
   +isCompanyTypeDialogOpen: boolean,
   +isCompanyDialogOpen: boolean,
-  +isNew: boolean,
+  +isModification: boolean,
   +dialogContent?: any
 };

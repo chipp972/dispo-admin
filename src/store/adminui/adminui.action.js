@@ -7,26 +7,42 @@ export const changeTab = (index: number, maxTab: number) => ({
 
 export const openDialog = (
   dialogId: 'user' | 'company' | 'companyType',
-  isNew: boolean,
+  isModification: boolean,
   dialogContent?: any
 ) => {
   switch (dialogId) {
     case 'user':
-      return { type: 'OPEN_USER_DIALOG', payload: { dialogContent, isNew } };
+      return {
+        type: 'OPEN_USER_DIALOG',
+        payload: {
+          dialogContent,
+          isModification
+        }
+      };
     case 'company':
       return {
         type: 'OPEN_COMPANY_DIALOG',
-        payload: { dialogContent, isNew }
+        payload: {
+          dialogContent,
+          isModification
+        }
       };
     case 'companyType':
       return {
         type: 'OPEN_COMPANY_TYPE_DIALOG',
-        payload: { dialogContent, isNew }
+        payload: {
+          dialogContent,
+          isModification
+        }
       };
     default:
       return {
         type: 'OPEN_DIALOG',
-        payload: { dialogId, dialogContent, isNew }
+        payload: {
+          dialogId,
+          dialogContent,
+          isModification
+        }
       };
   }
 };

@@ -6,9 +6,9 @@ import { TabContainer } from '../components/Nav/TabContainer';
 import BuisinessIcon from 'material-ui-icons/Business';
 import WorkIcon from 'material-ui-icons/Work';
 import FaceIcon from 'material-ui-icons/Face';
-import { UserList } from '../components/User/UserList';
-import { CompanyList } from '../components/Company/CompanyList';
-import { ConnectedCompanyTypeList } from '../containers/DataAPIContainer';
+import { UserListContainer } from '../containers/user/UserListContainer';
+import { CompanyListContainer } from '../containers/company/CompanyListContainer';
+import { CompanyTypeListContainer } from '../containers/companytype/CompanyTypeListContainer';
 import { AdminScreenDialog } from './AdminScreenDialog';
 
 const tabs = [
@@ -17,21 +17,21 @@ const tabs = [
     key: 'tab0',
     IconComponent: FaceIcon,
     label: 'UTILISATEURS',
-    Content: <UserList users={[]} />
+    Content: <UserListContainer />
   },
   {
     id: 'companyType',
     key: 'tab1',
     IconComponent: WorkIcon,
     label: `TYPE D'ENTREPRISE`,
-    Content: <ConnectedCompanyTypeList />
+    Content: <CompanyTypeListContainer />
   },
   {
     id: 'company',
     key: 'tab2',
     IconComponent: BuisinessIcon,
     label: 'ENTREPRISE',
-    Content: <CompanyList companies={[]} />
+    Content: <CompanyListContainer />
   }
 ];
 

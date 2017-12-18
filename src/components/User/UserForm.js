@@ -1,8 +1,17 @@
 // @flow
 import React from 'react';
 import { Form } from '../../components/Form/Form';
-import type { UserData } from 'dispo-api';
+import type { UserData, User } from 'dispo-api';
 import type { InputDescription } from '../../components/Form/Form';
+
+type UserFormProps = {
+  initialState?: User,
+  isModification: boolean,
+  isUserDialogOpen: boolean,
+  createUser: (formData: UserData) => any,
+  updateUser: (formData: UserData) => any,
+  closeDialog: () => any
+};
 
 const inputs: InputDescription[] = [
   { id: 'email', label: 'Adresse e-mail', type: 'text' },
@@ -14,7 +23,7 @@ const inputs: InputDescription[] = [
   { id: 'address', label: 'Adresse', type: 'text' }
 ];
 
-const defaultState: UserData = {
+const initialState: UserData = {
   email: '',
   password: '',
   lastName: '',
@@ -24,19 +33,18 @@ const defaultState: UserData = {
   address: ''
 };
 
-type UserFormProps = {
-  initialState?: UserData,
-  isNew: boolean,
-  submitAction: (formData: UserData) => any
-};
-
 export const UserForm = (props: UserFormProps) => (
   <Form
-    initialState={props.initialState || defaultState}
+    initialState={props.initialState || initialState}
     inputs={inputs}
-    onSubmit={props.submitAction}
-    onSubmitLabel={
-      props.isNew ? 'CREER UN UTILISATEUR' : 'MODIFIER UN UTILISATEUR'
-    }
+    onSubmit={(formData: UserData) => {
+      props.isModification
+        ? props.updateUser(formData)
+        : props.createUser(formData);
+      if (props.isUserDialogOpen) props.closeDialog();
+    }}
+    onSubmitLabel={`${
+      props.isModification ? 'MODIFIER' : 'CREER'
+    } UN UTILISATEUR`}
   />
 );

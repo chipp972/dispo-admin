@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Dialog } from '../../components/Dialog/Dialog';
-import { CompanyForm } from './CompanyForm';
+import { CompanyFormContainer } from '../../containers/company/CompanyFormContainer';
 import type { Company } from 'dispo-api';
 
 type CompanyDialogProps = {
@@ -18,9 +18,8 @@ export const CompanyDialog = (props: CompanyDialogProps) => (
     isDialogOpen={props.isDialogOpen}
     closeDialog={props.closeDialog}
     title="ENTREPRISE"
-    mainActionLabel="CREER"
     handleError={props.handleError}
-    Content={CompanyForm}
+    Content={CompanyFormContainer}
     contentProps={{ initialState: props.company }}
   />
 );

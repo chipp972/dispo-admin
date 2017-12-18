@@ -4,12 +4,15 @@ import { List, ListItem, Avatar, ListItemText } from 'material-ui';
 import type { Company } from 'dispo-api';
 
 type CompanyListProps = {
-  companies: Company[]
+  company: {
+    list: Company[],
+    byId: { [id: string]: Company }
+  }
 };
 
 export const CompanyList = (props: CompanyListProps) => (
   <List>
-    {props.companies.map((company) => (
+    {props.company.list.map(company => (
       <ListItem button key={company._id}>
         <Avatar>
           <img src={company.imageUrl} alt={company.name} />

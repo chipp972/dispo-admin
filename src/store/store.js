@@ -8,13 +8,29 @@ import { handleViewportChange } from './adminui/adminui.action';
 import { crud } from './apidata/api.action';
 import type { Store } from 'redux';
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
   dispoAdmin,
   { authentication: { email: '', code: '' } },
   composeEnhancers(applyMiddleware(ReduxThunk, Logger))
 );
+
+/**
+ * fetch API data if authenticated
+ * @param {Store} appStore
+ * @return {boolean}
+ */
+const initAPIData = (appStore: Store) => {
+  const { authentication } = appStore.getState();
+  const { isAuthenticated } = authentication;
+  if (!isAuthenticated) return false;
+
+  // get all data from the api
+  appStore.dispatch(crud.company.getAll());
+  appStore.dispatch(crud.user.getAll());
+  appStore.dispatch(crud.companyType.getAll());
+  return true;
+};
 
 /**
  * Init the app :
@@ -28,17 +44,9 @@ export const initApp = (appStore: Store) => {
   window.addEventListener('resize', () =>
     appStore.dispatch(handleViewportChange(window.innerWidth))
   );
-
+  initAPIData(appStore);
+  // TODO: subscribe to websocket events
   const unsubscribe = appStore.subscribe(() => {
-    const { authentication } = appStore.getState();
-    const { token } = authentication;
-    if (token) {
-      appStore.dispatch(crud.companyType.create({ name: 'garage' }));
-      appStore.dispatch(crud.company.getAll());
-      appStore.dispatch(crud.user.getAll());
-      appStore.dispatch(crud.companyType.getAll());
-      unsubscribe();
-    }
+    if (initAPIData(appStore)) unsubscribe();
   });
 };
-

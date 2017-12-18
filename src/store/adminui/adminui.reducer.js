@@ -7,7 +7,7 @@ const initialState: AdminUIState = {
   isUserDialogOpen: false,
   isCompanyTypeDialogOpen: false,
   isCompanyDialogOpen: false,
-  isNew: true,
+  isModification: false
 };
 
 export const adminuiReducer = (
@@ -21,7 +21,7 @@ export const adminuiReducer = (
         isUserDialogOpen: true,
         isCompanyDialogOpen: false,
         isCompanyTypeDialogOpen: false,
-        isNew: action.payload.isNew,
+        isModification: action.payload.isModification,
         dialogContent: action.payload.dialogContent
       };
     case 'OPEN_COMPANY_DIALOG':
@@ -30,7 +30,7 @@ export const adminuiReducer = (
         isUserDialogOpen: false,
         isCompanyDialogOpen: true,
         isCompanyTypeDialogOpen: false,
-        isNew: action.payload.isNew,
+        isModification: action.payload.isModification,
         dialogContent: action.payload.dialogContent
       };
     case 'OPEN_COMPANY_TYPE_DIALOG':
@@ -39,7 +39,7 @@ export const adminuiReducer = (
         isUserDialogOpen: false,
         isCompanyDialogOpen: false,
         isCompanyTypeDialogOpen: true,
-        isNew: action.payload.isNew,
+        isModification: action.payload.isModification,
         dialogContent: action.payload.dialogContent
       };
     case 'CLOSE_DIALOG':

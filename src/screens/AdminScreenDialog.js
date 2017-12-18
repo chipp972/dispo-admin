@@ -15,18 +15,21 @@ type AdminScreenDialogProps = {
   isUserDialogOpen: boolean,
   isCompanyDialogOpen: boolean,
   isCompanyTypeDialogOpen: boolean,
-  isNew: boolean,
+  isModification: boolean,
   dialogContent: any,
   tabs: any[],
   currentTabIndex: number,
-  openDialog: (dialogId: string, isNew: boolean, initialState?: any) => any,
+  openDialog: (
+    dialogId: string,
+    isModification: boolean,
+    initialState?: any
+  ) => any,
   closeDialog: () => any
 };
 
 export const AdminScreenDialog = (props: AdminScreenDialogProps) => (
   <div>
     <UserDialog
-      isNew={props.isNew}
       dialogContent={props.dialogContent}
       isMobileViewport={props.isMobileViewport}
       isDialogOpen={props.isUserDialogOpen}
@@ -34,7 +37,6 @@ export const AdminScreenDialog = (props: AdminScreenDialogProps) => (
       closeDialog={props.closeDialog}
     />
     <CompanyDialog
-      isNew={props.isNew}
       dialogContent={props.dialogContent}
       isMobileViewport={props.isMobileViewport}
       isDialogOpen={props.isCompanyDialogOpen}
@@ -42,7 +44,6 @@ export const AdminScreenDialog = (props: AdminScreenDialogProps) => (
       closeDialog={props.closeDialog}
     />
     <CompanyTypeDialog
-      isNew={props.isNew}
       dialogContent={props.dialogContent}
       isMobileViewport={props.isMobileViewport}
       isDialogOpen={props.isCompanyTypeDialogOpen}
@@ -59,7 +60,7 @@ export const AdminScreenDialog = (props: AdminScreenDialogProps) => (
       color="primary"
       aria-label="add"
       onClick={() =>
-        props.openDialog(getTabId(props.currentTabIndex, props.tabs), true)
+        props.openDialog(getTabId(props.currentTabIndex, props.tabs), false)
       }
     >
       <AddIcon />

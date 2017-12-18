@@ -2,19 +2,17 @@
 import React from 'react';
 import { Form } from '../../components/Form/Form';
 import type { InputDescription } from '../../components/Form/Form';
-import type {
-  Company,
-  CompanyData,
-  CompanyType,
-  User,
-  DataAPI
-} from 'dispo-api';
+import type { Company, CompanyData, CompanyType, User } from 'dispo-api';
 
 type CompanyFormProps = {
-  companyTypes: CompanyType[],
-  users: User[],
-  dataAPI: DataAPI,
-  companiesRefresh: Function
+  companyTypeList: CompanyType[],
+  userList: User[],
+  isModification: boolean,
+  isCompanyDialogOpen: boolean,
+  createCompany: CompanyData => any,
+  updateCompany: CompanyData => any,
+  closeDialog: () => any,
+  initialState?: Company
 };
 
 export const initialState: CompanyData = {
@@ -40,22 +38,23 @@ const inputs: InputDescription[] = [
 
 export const CompanyForm = (props: CompanyFormProps) => (
   <Form
-    initialState={initialState}
+    initialState={props.initialState || initialState}
     inputs={inputs}
     selectOptions={{
-      owner: props.users.map((user) => ({ _id: user._id, label: user.email })),
-      type: props.companyTypes.map((type) => ({
+      owner: props.userList.map(user => ({ _id: user._id, label: user.email })),
+      type: props.companyTypeList.map(type => ({
         _id: type._id,
         label: type.name
       }))
     }}
     onSubmit={(formData: CompanyData) => {
-      props.dataAPI.company
-        .create(formData)
-        .then((res: Company) => console.log(res))
-        .then(() => props.companiesRefresh())
-        .catch((err) => console.log(err));
+      props.isModification
+        ? props.updateCompany(formData)
+        : props.createCompany(formData);
+      if (props.isCompanyDialogOpen) props.closeDialog();
     }}
-    onSubmitLabel="CREER UNE ENTREPRISE"
+    onSubmitLabel={`${
+      props.isModification ? 'MODIFIER' : 'CREER'
+    } UNE ENTREPRISE`}
   />
 );
