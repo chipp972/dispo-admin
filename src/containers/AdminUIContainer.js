@@ -6,6 +6,7 @@ import {
   closeDialog
 } from '../store/adminui/adminui.action';
 import { AdminScreen } from '../screens/AdminScreen';
+import type { DialogId } from '../store/adminui/adminui.js.flow';
 
 const mapStateToProps = (state, ownProps) => ({
   isAuthenticated: state.authentication.isAuthenticated,
@@ -14,17 +15,17 @@ const mapStateToProps = (state, ownProps) => ({
   isCompanyDialogOpen: state.adminui.isCompanyDialogOpen,
   isCompanyTypeDialogOpen: state.adminui.isCompanyTypeDialogOpen,
   currentTabIndex: state.adminui.currentTabIndex,
-  isNew: state.adminui.isNew,
+  isModification: state.adminui.isModification,
   dialogContent: state.adminui.dialogContent
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   changeTab: (index, maxTab) => dispatch(changeTab(index, maxTab)),
   openDialog: (
-    dialogId: 'user' | 'company' | 'companyType',
-    isNew: boolean,
+    dialogId: DialogId,
+    isModification: boolean,
     initialState
-  ) => dispatch(openDialog(dialogId, isNew, initialState)),
+  ) => dispatch(openDialog(dialogId, isModification, initialState)),
   closeDialog: () => dispatch(closeDialog())
 });
 

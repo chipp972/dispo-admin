@@ -8,15 +8,27 @@ import WorkIcon from 'material-ui-icons/Work';
 import FaceIcon from 'material-ui-icons/Face';
 import { UserListContainer } from '../containers/user/UserListContainer';
 import { CompanyListContainer } from '../containers/company/CompanyListContainer';
-import { CompanyTypeListContainer } from '../containers/companytype/CompanyTypeListContainer';
+import { CompanyTypeListContainer } from '../components/CompanyType/CompanyTypeList/CompanyTypeListContainer';
 import { AdminScreenDialog } from './AdminScreenDialog';
+
+type AdminScreenProps = {
+  isAuthenticated: boolean,
+  isMobileViewport: boolean,
+  isUserDialogOpen: boolean,
+  isCompanyDialogOpen: boolean,
+  isCompanyTypeDialogOpen: boolean,
+  currentTabIndex: number,
+  changeTab: (index: number, maxTab: number) => any,
+  openDialog: (dialogId: string, initialState?: any) => any,
+  closeDialog: () => any
+};
 
 const tabs = [
   {
     id: 'user',
     key: 'tab0',
     IconComponent: FaceIcon,
-    label: 'UTILISATEURS',
+    label: 'UTILISATEUR',
     Content: <UserListContainer />
   },
   {
@@ -34,18 +46,6 @@ const tabs = [
     Content: <CompanyListContainer />
   }
 ];
-
-type AdminScreenProps = {
-  isAuthenticated: boolean,
-  isMobileViewport: boolean,
-  isUserDialogOpen: boolean,
-  isCompanyDialogOpen: boolean,
-  isCompanyTypeDialogOpen: boolean,
-  currentTabIndex: number,
-  changeTab: (index: number, maxTab: number) => any,
-  openDialog: (dialogId: string, initialState?: any) => any,
-  closeDialog: () => any
-};
 
 export const AdminScreen = (props: AdminScreenProps) => (
   <div

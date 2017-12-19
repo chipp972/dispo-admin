@@ -2,10 +2,11 @@
 import React from 'react';
 import { UserDialog } from '../components/User/UserDialog';
 import { CompanyDialog } from '../components/Company/CompanyDialog';
-import { CompanyTypeDialog } from '../components/CompanyType/CompanyTypeDialog';
+import { ConfirmContainer } from '../components/Confirm/ConfirmContainer';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import { compose, nth, prop } from 'ramda';
+import { CompanyTypeDialogContainer } from '../components/CompanyType/CompanyTypeDialog/CompanyTypeDialogContainer';
 
 const getTabId = (index: number, tabs: any[]): string =>
   compose(prop('id'), nth(index))(tabs);
@@ -43,13 +44,8 @@ export const AdminScreenDialog = (props: AdminScreenDialogProps) => (
       handleError={(err: Error) => console.log(err)}
       closeDialog={props.closeDialog}
     />
-    <CompanyTypeDialog
-      dialogContent={props.dialogContent}
-      isMobileViewport={props.isMobileViewport}
-      isDialogOpen={props.isCompanyTypeDialogOpen}
-      handleError={(err: Error) => console.log(err)}
-      closeDialog={props.closeDialog}
-    />
+    <CompanyTypeDialogContainer />
+    <ConfirmContainer />
     <Button
       fab
       style={{

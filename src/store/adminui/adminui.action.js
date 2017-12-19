@@ -1,4 +1,5 @@
 // @flow
+import type { DialogId } from './adminui.js.flow';
 
 export const changeTab = (index: number, maxTab: number) => ({
   type: 'CHANGE_TAB',
@@ -6,7 +7,7 @@ export const changeTab = (index: number, maxTab: number) => ({
 });
 
 export const openDialog = (
-  dialogId: 'user' | 'company' | 'companyType',
+  dialogId: DialogId,
   isModification: boolean,
   dialogContent?: any
 ) => {
@@ -35,6 +36,10 @@ export const openDialog = (
           isModification
         }
       };
+    case 'confirm':
+      return {
+        type: 'OPEN_CONFIRM_DIALOG'
+      };
     default:
       return {
         type: 'OPEN_DIALOG',
@@ -46,6 +51,19 @@ export const openDialog = (
       };
   }
 };
+
+export const openCreateDialog = (dialogId: DialogId) =>
+  openDialog(dialogId, false);
+
+export const openEditDialog = ({
+  dialogId,
+  dialogContent
+}: {
+  dialogId: DialogId,
+  dialogContent: any
+}) => openDialog(dialogId, true, dialogContent);
+
+export const openConfirmDialog = () => openDialog('confirm', false);
 
 export const closeDialog = () => ({
   type: 'CLOSE_DIALOG'

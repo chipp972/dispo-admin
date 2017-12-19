@@ -1,8 +1,8 @@
 // @flow
 import { connect } from 'react-redux';
-import { CompanyTypeForm } from '../../components/CompanyType/CompanyTypeForm';
-import { crud } from '../../store/apidata/api.action';
-import { closeDialog } from '../../store/adminui/adminui.action';
+import { CompanyTypeForm } from './CompanyTypeForm';
+import { crud } from '../../../store/apidata/api.action';
+import { closeDialog } from '../../../store/adminui/adminui.action';
 
 const mapStateToProps = (state, ownProps) => ({
   isModification: state.adminui.isModification,
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   closeDialog: () => dispatch(closeDialog())
 });
 
-export const ConnectedCompanyTypeForm = connect(
+export const CompanyTypeFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(CompanyTypeForm);
