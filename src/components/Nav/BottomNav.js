@@ -18,7 +18,12 @@ type BottomNavProps = {
 
 export const BottomNav = (props: BottomNavProps) => (
   <BottomNavigation
-    style={{ width: '100%', position: 'fixed', bottom: 0, boxShadow: '0 -20px 25px -20px rgba(0,0,0,.3)' }}
+    style={{
+      width: '100%',
+      position: 'fixed',
+      bottom: 0,
+      boxShadow: '0 -20px 25px -20px rgba(0,0,0,.3)'
+    }}
     value={props.currentTabIndex}
     onChange={(event, index) => props.changeTab(index, props.tabs.length)}
   >

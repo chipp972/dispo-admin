@@ -1,15 +1,10 @@
 // @flow
-export type DialogId = 'user' | 'company' | 'companyType' | 'confirm'
 
 export type AdminUIState = {
   +isMobileViewport: boolean,
   +currentTabIndex: number,
-  +isUserDialogOpen: boolean,
-  +isCompanyTypeDialogOpen: boolean,
-  +isCompanyDialogOpen: boolean,
-  +isModification: boolean,
-  +isRemoveDialogOpen: boolean,
   +dialogContent?: any,
-  +currentOpenDialog: DialogId | 'none',
+  +currentOpenDialog: string,
+  +currentTabId: string,
+  +isMenuOpen: boolean
 };
-

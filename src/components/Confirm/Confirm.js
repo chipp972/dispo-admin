@@ -12,8 +12,9 @@ type ConfirmProps = {
   title: string,
   contentText: string,
   isDialogOpen: boolean,
-  confirmAction: () => any,
-  closeDialog: () => any
+  confirmAction: (dialogContent?: any) => any,
+  closeDialog: () => any,
+  dialogContent?: any
 };
 
 export const Confirm = (props: ConfirmProps) => (
@@ -35,7 +36,7 @@ export const Confirm = (props: ConfirmProps) => (
       </Button>
       <Button
         onClick={() => {
-          props.confirmAction();
+          props.confirmAction(props.dialogContent);
           props.closeDialog();
         }}
         color="primary"
