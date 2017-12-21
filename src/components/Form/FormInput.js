@@ -17,7 +17,8 @@ export const FormInput = ({
   selectOptions,
   handleInputChange,
   value,
-  disabled
+  disabled,
+  isValid
 }: FormInputProps) => {
   switch (type) {
     case 'select':
@@ -32,7 +33,7 @@ export const FormInput = ({
           input={<Input id={id} />}
           disabled={disabled}
         >
-          {selectOptions.map((option) => (
+          {selectOptions.map(option => (
             <MenuItem key={option._id} value={option._id}>
               {option.label}
             </MenuItem>
@@ -46,6 +47,7 @@ export const FormInput = ({
           label={label}
           type={type}
           value={value}
+          error={isValid && !isValid(value)}
           onChange={handleInputChange(id)}
           margin="normal"
           disabled={disabled}

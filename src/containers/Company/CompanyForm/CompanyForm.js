@@ -27,13 +27,49 @@ export const initialState: CompanyData = {
 };
 
 const inputs: InputDescription[] = [
-  { id: 'owner', label: 'Gerant', type: 'select' },
-  { id: 'name', label: "Nom de l'entreprise", type: 'text' },
-  { id: 'type', label: 'Type', type: 'select' },
-  { id: 'siret', label: 'Siret', type: 'text' },
+  {
+    id: 'owner',
+    label: 'Gerant',
+    type: 'select',
+    isValid: value => value.length > 0,
+    helperText: 'Choisir un gerant'
+  },
+  {
+    id: 'name',
+    label: "Nom de l'entreprise",
+    type: 'text',
+    isValid: value => value.length > 0,
+    helperText: 'Un nom est obligatoire'
+  },
+  {
+    id: 'type',
+    label: 'Type',
+    type: 'select',
+    isValid: value => value.length > 0,
+    helperText: "Choisir un type d'entreprise"
+  },
+  {
+    id: 'siret',
+    label: 'Siret',
+    type: 'text',
+    isValid: value => /[a-zA-Z0-9]{14}/.test(value),
+    helperText: 'Contient 14 lettres et chiffres'
+  },
   { id: 'imageUrl', label: 'image', type: 'text' },
-  { id: 'address', label: 'Adresse', type: 'text' },
-  { id: 'phoneNumber', label: 'Numero de telephone', type: 'text' }
+  {
+    id: 'address',
+    label: 'Adresse',
+    type: 'text',
+    isValid: value => value.length > 0,
+    helperText: 'Une adresse est obligatoire'
+  },
+  {
+    id: 'phoneNumber',
+    label: 'Numero de telephone',
+    type: 'text',
+    isValid: value => /[0-9]{10}/.test(value),
+    helperText: 'Contient exactement 10 chiffres'
+  }
 ];
 
 export const CompanyForm = (props: CompanyFormProps) => (
@@ -53,8 +89,6 @@ export const CompanyForm = (props: CompanyFormProps) => (
         : props.createCompany(formData);
       if (props.isDialogOpen) props.closeDialog();
     }}
-    onSubmitLabel={`${
-      props.isUpdate ? 'MODIFIER' : 'CREER'
-    } UNE ENTREPRISE`}
+    onSubmitLabel={`${props.isUpdate ? 'MODIFIER' : 'CREER'} UNE ENTREPRISE`}
   />
 );

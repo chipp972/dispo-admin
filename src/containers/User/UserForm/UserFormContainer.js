@@ -5,8 +5,16 @@ import { crud } from '../../../store/apidata/api.action';
 import { closeDialog } from '../../../store/adminui/adminui.action';
 import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 
+const formatDate = (datestring: string) => {
+  const re = /^(\d{4}-\d{2}-\d{2})/.exec(datestring);
+  return re.length > 1 ? re[1] : '';
+};
+
 const mapStateToProps = (state, ownProps) => ({
-  initialState: state.adminui.dialogContent,
+  initialState: state.adminui.dialogContent && {
+    ...state.adminui.dialogContent,
+    birthDate: formatDate(state.adminui.dialogContent.birthDate)
+  },
   isUpdate: state.adminui.currentOpenDialog === DIALOG_ID.update,
   isDialogOpen:
     (state.adminui.currentOpenDialog === DIALOG_ID.create ||

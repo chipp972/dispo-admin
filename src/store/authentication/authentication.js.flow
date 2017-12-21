@@ -10,7 +10,8 @@ export type AuthenticationState = {
   +error?: Error,
   +canSendCode: boolean,
   +isAuthenticated: boolean,
-  +isCodeReceived: boolean
+  +isCodeReceived: boolean,
+  +errorList: string[]
 };
 
 export type SendCodeSuccessAction = {

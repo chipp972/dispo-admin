@@ -1,10 +1,10 @@
 // @flow
 import { connect } from 'react-redux';
 import { SnackbarError } from './SnackbarError';
-import { hideError } from '../../store/apidata/api.action';
+import { hideError } from '../../store/error/error.action';
 
 const mapStateToProps = (state, ownProps) => ({
-  errorList: state.apidata.errorList
+  errorList: state.errorHandler.errorList
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

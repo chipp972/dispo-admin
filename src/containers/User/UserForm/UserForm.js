@@ -14,7 +14,12 @@ type UserFormProps = {
 };
 
 const inputs: InputDescription[] = [
-  { id: 'email', label: 'Adresse e-mail', type: 'text' },
+  {
+    id: 'email',
+    label: 'Adresse e-mail',
+    type: 'text',
+    isValid: value => value && value.length > 0
+  },
   { id: 'password', label: 'Mot de passe', type: 'password' },
   { id: 'lastName', label: 'Nom', type: 'text' },
   { id: 'firstName', label: 'Prenom', type: 'text' },

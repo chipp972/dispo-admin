@@ -17,6 +17,5 @@ export type APIDataState = {
   user: {
     list: User[],
     byId?: { [string]: User }
-  },
-  errorList: string[]
+  }
 };

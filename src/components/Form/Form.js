@@ -8,7 +8,8 @@ export type InputDescription = {
   label: string,
   helperText?: string,
   type: 'select' | 'text' | 'date' | 'password',
-  disabled?: boolean
+  disabled?: boolean,
+  isValid?: (inputContent: string) => boolean
 };
 
 export type FormProps<T> = {
@@ -39,6 +40,9 @@ export class Form<T> extends Component<FormProps<T>, *> {
   };
 
   render() {
+    const isInvalid = (inputDescription: InputDescription) =>
+      inputDescription.isValid &&
+      !inputDescription.isValid(this.state[inputDescription.id]);
     return (
       <form style={{ display: 'flex', flexFlow: 'column wrap', padding: 20 }}>
         {this.props.inputs.map((inputDescription: InputDescription) => (
@@ -46,6 +50,7 @@ export class Form<T> extends Component<FormProps<T>, *> {
             key={`formcontrol_${inputDescription.id}`}
             disabled={inputDescription.disabled}
             style={{ paddingBottom: 20 }}
+            error={isInvalid(inputDescription)}
           >
             <FormInput
               {...inputDescription}
@@ -56,7 +61,7 @@ export class Form<T> extends Component<FormProps<T>, *> {
                 this.props.selectOptions[inputDescription.id]
               }
             />
-            {inputDescription.helperText ? (
+            {inputDescription.helperText && isInvalid(inputDescription) ? (
               <FormHelperText>{inputDescription.helperText}</FormHelperText>
             ) : (
               <div />

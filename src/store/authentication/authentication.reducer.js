@@ -10,7 +10,7 @@ const initialState: AuthenticationState = {
   code: '',
   canSendCode: true,
   isAuthenticated: false,
-  isCodeReceived: false
+  isCodeReceived: false,
 };
 
 export const authenticationReducer = (
@@ -46,7 +46,6 @@ export const authenticationReducer = (
         isAuthenticated: false,
         canSendCode: true,
         isCodeReceived: false,
-        error: action.error
       };
     case ACTION_TYPE.INVALID_OR_EXPIRED_TOKEN:
       return {
@@ -55,11 +54,8 @@ export const authenticationReducer = (
         tokenId: '',
         expireAt: undefined,
         isAuthenticated: false,
-        canSendCode: true,
-        error: new Error('token invalide ou expire')
+        canSendCode: true
       };
-    case ACTION_TYPE.STORE_TOKEN.FAILURE:
-      return { ...state, error: action.error };
     default:
       return state;
   }

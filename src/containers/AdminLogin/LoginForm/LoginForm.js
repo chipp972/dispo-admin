@@ -4,7 +4,7 @@ import { Form } from '../../../components/Form/Form';
 
 type LoginFormProps = {
   canSendCode: boolean,
-  sendCode: (email: string) => any,
+  sendCode: (email: string) => any
 };
 
 export const LoginForm = (props: LoginFormProps) => (

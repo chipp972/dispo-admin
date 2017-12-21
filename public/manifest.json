@@ -3,7 +3,7 @@
   "name": "Dispo",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "dispo.png",
       "sizes": "192x192",
       "type": "image/png"
     }

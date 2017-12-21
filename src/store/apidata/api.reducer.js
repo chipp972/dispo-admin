@@ -1,35 +1,22 @@
 // @flow
 import { addToState, convertToMap, removeFromState } from './api.helper';
 import type { APIDataState } from './api.js.flow';
-import { append, drop } from 'ramda';
 
 const initialState: APIDataState = {
   company: { list: [], byId: {} },
   companytype: { list: [], byId: {} },
-  user: { list: [], byId: {} },
-  errorList: []
+  user: { list: [], byId: {} }
 };
 
 export const apiDataReducer = (
   state: APIDataState = initialState,
   action: any
 ) => {
-  if (action.type === 'HIDE_ERROR_MESSAGE') {
-    return {
-      ...state,
-      errorList: drop(1, state.errorList)
-    };
-  }
   const re = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(action.type);
   if (!re || re.length < 4) return state;
   const [, actionType, modelName, status] = re;
+  if (status === 'FAILURE' || status === 'PENDING') return state;
   const name = modelName.toLowerCase();
-  if (status === 'FAILURE') {
-    return {
-      ...state,
-      errorList: append(action.error.message, state.errorList)
-    };
-  }
   switch (actionType) {
     case 'GETALL':
       return {

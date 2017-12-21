@@ -11,7 +11,6 @@ import type {
   UserData
 } from 'dispo-api';
 import type { Dispatch } from 'redux';
-import type { APIDataState } from './api.js.flow';
 
 const fetcher = dataAPI(fetch, env.api.url);
 
@@ -78,7 +77,3 @@ export const crud: CrudAPI = {
     remove: generateCrudAction('remove', 'user')
   }
 };
-
-export const hideError = () => ({
-  type: 'HIDE_ERROR_MESSAGE'
-});

@@ -6,13 +6,10 @@ import {
   CODE_SENDING_DELAY
 } from './authentication.constant';
 import env from '../../env';
-import type { AuthRes, PasswordLessStartRes } from 'dispo-api';
+import type { AuthRes } from 'dispo-api';
 import type {
   StoreTokenAction,
-  AuthenticationAction,
-  AuthenticationState,
-  AuthenticateAction,
-  SendCodeAction
+  AuthenticationState
 } from './authentication.js.flow';
 
 type GetState = () => AuthenticationState;
