@@ -1,0 +1,14 @@
+// @flow
+import type { Node, ElementType } from 'react';
+
+export type NavProps = {
+  tabs: Array<{
+    key: string,
+    IconComponent: ElementType,
+    label: string,
+    Content: Node
+  }>,
+  isMobileViewport: boolean,
+  changeTab: (index: number, maxTabs: number) => any,
+  currentTabIndex: number
+};

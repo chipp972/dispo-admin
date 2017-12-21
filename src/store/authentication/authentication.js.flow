@@ -8,7 +8,9 @@ export type AuthenticationState = {
   +tokenId?: string,
   +expireAt?: Date,
   +error?: Error,
-  +isAuthenticated: boolean
+  +canSendCode: boolean,
+  +isAuthenticated: boolean,
+  +isCodeReceived: boolean
 };
 
 export type SendCodeSuccessAction = {
@@ -40,3 +42,13 @@ export type AuthenticationAction =
   | TokenRetrievalAction
   | StoreTokenAction
   | ApiCommunicationFailure;
+
+export interface AuthenticateAction extends AuthenticationAction {
+  type: 'AUTHENTICATE_SUCCESS';
+  payload: AuthRes;
+}
+
+export type SendCodeAction = {
+  type: 'SEND_CODE_SUCCESS',
+  payload: PasswordLessStartRes
+};

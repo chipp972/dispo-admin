@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
+import Button from 'material-ui/Button';
 
 type MenuProps = {
   isMenuOpen: boolean,
@@ -18,7 +19,7 @@ export const Menu = (props: MenuProps) => {
       onRequestClose={() => props.toggleMenu()}
     >
       <List>
-        <Link to="/logout">Deconnexion</Link>
+        <Button component={props => <Link to="/logout" />}>Deconnexion</Button>
         <Divider />
       </List>
     </Drawer>

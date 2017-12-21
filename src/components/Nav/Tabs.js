@@ -1,20 +1,9 @@
 // @flow
 import React from 'react';
 import { Tabs as MUITabs, Tab } from 'material-ui';
-import type { Node, ElementType } from 'react';
+import type { NavProps } from './Nav.js.flow';
 
-type TabsProps = {
-  tabs: Array<{
-    key: string,
-    IconComponent: ElementType,
-    label: string,
-    Content: Node
-  }>,
-  changeTab: (index: number, maxTab: number) => any,
-  currentTabIndex: number
-};
-
-export const Tabs = (props: TabsProps) => (
+export const Tabs = (props: NavProps) => (
   <MUITabs
     value={props.currentTabIndex}
     onChange={(event, index) => props.changeTab(index, props.tabs.length)}

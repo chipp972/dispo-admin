@@ -16,6 +16,7 @@ export type FormProps<T> = {
   inputs: InputDescription[],
   onSubmit: (formData: any) => any,
   onSubmitLabel: string,
+  isSubmitDisabled?: boolean,
   selectOptions?: {
     [selectInput: string]: Array<{ _id: string, label: string }>
   }
@@ -43,7 +44,7 @@ export class Form<T> extends Component<FormProps<T>, *> {
         {this.props.inputs.map((inputDescription: InputDescription) => (
           <FormControl
             key={`formcontrol_${inputDescription.id}`}
-            disabled={inputDescription.disabled === true}
+            disabled={inputDescription.disabled}
             style={{ paddingBottom: 20 }}
           >
             <FormInput
@@ -64,6 +65,7 @@ export class Form<T> extends Component<FormProps<T>, *> {
         ))}
         <Button
           raised
+          disabled={this.props.isSubmitDisabled}
           color="primary"
           style={{ padding: 10 }}
           onClick={() => this.props.onSubmit(this.state)}

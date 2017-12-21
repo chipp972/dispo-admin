@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import BuisinessIcon from 'material-ui-icons/Business';
 import WorkIcon from 'material-ui-icons/Work';
 import FaceIcon from 'material-ui-icons/Face';

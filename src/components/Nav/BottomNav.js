@@ -3,20 +3,9 @@ import React from 'react';
 import BottomNavigation, {
   BottomNavigationButton
 } from 'material-ui/BottomNavigation';
-import type { Node, ElementType } from 'react';
+import type { NavProps } from './Nav.js.flow';
 
-type BottomNavProps = {
-  tabs: Array<{
-    key: string,
-    IconComponent: ElementType,
-    label: string,
-    Content: Node
-  }>,
-  changeTab: (index: number, maxTab: number) => any,
-  currentTabIndex: number
-};
-
-export const BottomNav = (props: BottomNavProps) => (
+export const BottomNav = (props: NavProps) => (
   <BottomNavigation
     style={{
       width: '100%',

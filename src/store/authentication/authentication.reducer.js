@@ -1,16 +1,16 @@
 // @flow
+import { ACTION_TYPE } from './authentication.constant';
 import type {
   AuthenticationState,
-  AuthenticationAction,
-  ApiCommunicationFailure,
-  SendCodeSuccessAction,
-  AuthenticateAction,
+  AuthenticationAction
 } from './authentication';
 
 const initialState: AuthenticationState = {
   email: '',
   code: '',
-  isAuthenticated: false
+  canSendCode: true,
+  isAuthenticated: false,
+  isCodeReceived: false
 };
 
 export const authenticationReducer = (
@@ -18,14 +18,16 @@ export const authenticationReducer = (
   action: AuthenticationAction
 ) => {
   switch (action.type) {
-    case 'SEND_CODE_SUCCESS':
-      (action: SendCodeSuccessAction);
+    case ACTION_TYPE.SEND_CODE.PENDING:
+      return { ...state, canSendCode: false };
+    case ACTION_TYPE.ENABLE_CODE_SENDING:
+      return { ...state, canSendCode: true };
+    case ACTION_TYPE.SEND_CODE.SUCCESS:
       const { email } = action.payload;
-      return { ...state, email };
-    case 'AUTHENTICATE_SUCCESS':
-    case 'TOKEN_REFRESH_SUCCESS':
-    case 'RETRIEVE_TOKEN_SUCCESS':
-      (action: AuthenticateAction);
+      return { ...state, email, isCodeReceived: true, canSendCode: false };
+    case ACTION_TYPE.AUTHENTICATE.SUCCESS:
+    case ACTION_TYPE.TOKEN_REFRESH.SUCCESS:
+    case ACTION_TYPE.RETRIEVE_TOKEN.SUCCESS:
       const { token, tokenId, expireAt } = action.payload;
       return {
         ...state,
@@ -34,27 +36,29 @@ export const authenticationReducer = (
         expireAt: new Date(expireAt),
         isAuthenticated: true
       };
-    case 'SEND_CODE_FAILURE':
-    case 'AUTHENTICATE_FAILURE':
-    case 'RETRIEVE_TOKEN_FAILURE':
-      (action: ApiCommunicationFailure);
+    case ACTION_TYPE.SEND_CODE.FAILURE:
+    case ACTION_TYPE.AUTHENTICATE.FAILURE:
+    case ACTION_TYPE.TOKEN_REFRESH.FAILURE:
       return {
         ...state,
         email: '',
         code: '',
         isAuthenticated: false,
-        error: action.error,
+        canSendCode: true,
+        isCodeReceived: false,
+        error: action.error
       };
-    case 'INVALID_OR_EXPIRED_TOKEN':
+    case ACTION_TYPE.INVALID_OR_EXPIRED_TOKEN:
       return {
         ...state,
         token: '',
         tokenId: '',
         expireAt: undefined,
         isAuthenticated: false,
+        canSendCode: true,
         error: new Error('token invalide ou expire')
       };
-    case 'STORE_TOKEN_FAILURE':
+    case ACTION_TYPE.STORE_TOKEN.FAILURE:
       return { ...state, error: action.error };
     default:
       return state;

@@ -9,7 +9,8 @@
     "test": "react-scripts test --env=jsdom",
     "test:watch": "tape-watch -r babel-register \"src/**/__tests__/*\"",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "inspect": "jsinspect ./src"
   },
   "dependencies": {
     "dispo-api": "git+https://c292397db9ed2e7469547a17ed27769c9b50a535:x-oauth-basic@github.com/chipp972/dispo-api.git",

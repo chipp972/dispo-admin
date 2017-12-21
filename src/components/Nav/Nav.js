@@ -2,32 +2,12 @@
 import React from 'react';
 import { Tabs } from './Tabs';
 import { BottomNav } from './BottomNav';
-import type { ElementType } from 'react';
-
-type NavProps = {
-  tabs: Array<{
-    key: string,
-    IconComponent: ElementType,
-    label: string,
-    Content: Node
-  }>,
-  isMobileViewport: boolean,
-  changeTab: (index: number, maxTabs: number) => any,
-  currentTabIndex: number
-};
+import type { NavProps } from './Nav.js.flow';
 
 export const Nav = (props: NavProps) => {
   return props.isMobileViewport ? (
-    <BottomNav
-      tabs={props.tabs}
-      changeTab={props.changeTab}
-      currentTabIndex={props.currentTabIndex}
-    />
+    <BottomNav {...props} />
   ) : (
-    <Tabs
-      tabs={props.tabs}
-      changeTab={props.changeTab}
-      currentTabIndex={props.currentTabIndex}
-    />
+    <Tabs {...props} />
   );
 };

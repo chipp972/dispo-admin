@@ -3,7 +3,8 @@ import React from 'react';
 import { Form } from '../../../components/Form/Form';
 
 type LoginFormProps = {
-  sendCode: (email: string) => any
+  canSendCode: boolean,
+  sendCode: (email: string) => any,
 };
 
 export const LoginForm = (props: LoginFormProps) => (
@@ -12,5 +13,6 @@ export const LoginForm = (props: LoginFormProps) => (
     inputs={[{ id: 'email', label: 'Email', type: 'text' }]}
     onSubmit={({ email }) => props.sendCode(email)}
     onSubmitLabel="Envoyer le code"
+    isSubmitDisabled={!props.canSendCode}
   />
 );

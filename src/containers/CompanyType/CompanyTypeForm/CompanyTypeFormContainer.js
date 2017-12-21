@@ -8,7 +8,7 @@ import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 const mapStateToProps = (state, ownProps) => ({
   initialState: state.adminui.dialogContent,
   isUpdate: state.adminui.currentOpenDialog === DIALOG_ID.update,
-  isCompanyTypeDialogOpen:
+  isDialogOpen:
     (state.adminui.currentOpenDialog === DIALOG_ID.create ||
       state.adminui.currentOpenDialog === DIALOG_ID.update) &&
     state.adminui.currentTabId === TAB_ID.companyType

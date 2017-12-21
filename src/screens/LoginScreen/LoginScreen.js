@@ -4,13 +4,10 @@ import { AuthFormContainer } from '../../containers/AdminLogin/AuthForm/AuthForm
 import { LoginFormContainer } from '../../containers/AdminLogin/LoginForm/LoginFormContainer';
 
 type LoginScreenProps = {
-  email: string
+  isCodeReceived: boolean,
+  canResendCode: boolean
 };
 
 export const LoginScreen = (props: LoginScreenProps) => {
-  return props.email.length > 0 ? (
-    <AuthFormContainer />
-  ) : (
-    <LoginFormContainer />
-  );
+  return props.isCodeReceived ? <AuthFormContainer /> : <LoginFormContainer />;
 };
