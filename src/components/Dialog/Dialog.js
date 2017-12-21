@@ -11,9 +11,8 @@ type DialogProps = {
   isMobileViewport: boolean,
   title: string,
   Content: ElementType,
-  contentProps: any,
+  contentProps?: any,
   isDialogOpen: boolean,
-  handleError: (err: Error) => any,
   closeDialog: () => any
 };
 
@@ -23,7 +22,6 @@ export const Dialog = ({
   Content,
   contentProps,
   isDialogOpen,
-  handleError,
   closeDialog
 }: DialogProps) => (
   <MUIDialog
@@ -35,7 +33,6 @@ export const Dialog = ({
     <DialogHeader
       isMobileViewport={isMobileViewport}
       title={title}
-      handleError={handleError}
       closeDialog={closeDialog}
     />
     <div style={{ padding: "80px 0 0 0" }}>

@@ -1,13 +1,15 @@
 // @flow
+import { TAB_ID, DIALOG_ID, ACTION_TYPE } from './adminui.constant';
+import env from '../../env';
 import type { AdminUIState } from './adminui.js.flow';
+import { tabs } from './adminui.constant';
 
 const initialState: AdminUIState = {
-  isMobileViewport: window.innerWidth < 600,
+  isMobileViewport: window.innerWidth < env.ui.mobileMaxWidth,
   currentTabIndex: 0,
-  isUserDialogOpen: false,
-  isCompanyTypeDialogOpen: false,
-  isCompanyDialogOpen: false,
-  isModification: false
+  currentTabId: TAB_ID.default,
+  currentOpenDialog: DIALOG_ID.none,
+  isMenuOpen: false
 };
 
 export const adminuiReducer = (
@@ -15,46 +17,34 @@ export const adminuiReducer = (
   action: any
 ) => {
   switch (action.type) {
-    case 'OPEN_USER_DIALOG':
+    case ACTION_TYPE.OPEN_DIALOG:
+      const { dialogId, dialogContent } = action.payload;
       return {
         ...state,
-        isUserDialogOpen: true,
-        isCompanyDialogOpen: false,
-        isCompanyTypeDialogOpen: false,
-        isModification: action.payload.isModification,
-        dialogContent: action.payload.dialogContent
+        currentOpenDialog: dialogId,
+        dialogContent: dialogContent
       };
-    case 'OPEN_COMPANY_DIALOG':
+    case ACTION_TYPE.CLOSE_DIALOG:
       return {
         ...state,
-        isUserDialogOpen: false,
-        isCompanyDialogOpen: true,
-        isCompanyTypeDialogOpen: false,
-        isModification: action.payload.isModification,
-        dialogContent: action.payload.dialogContent
+        currentOpenDialog: DIALOG_ID.none,
+        dialogContent: undefined
       };
-    case 'OPEN_COMPANY_TYPE_DIALOG':
-      return {
-        ...state,
-        isUserDialogOpen: false,
-        isCompanyDialogOpen: false,
-        isCompanyTypeDialogOpen: true,
-        isModification: action.payload.isModification,
-        dialogContent: action.payload.dialogContent
-      };
-    case 'CLOSE_DIALOG':
-      return {
-        ...state,
-        isUserDialogOpen: false,
-        isCompanyDialogOpen: false,
-        isCompanyTypeDialogOpen: false
-      };
-    case 'CHANGE_TAB':
+    case ACTION_TYPE.CHANGE_TAB:
       const { index, maxTab } = action.payload;
       const correctIndex = index < 0 ? maxTab - 1 : index % maxTab;
-      return { ...state, currentTabIndex: correctIndex };
-    case 'VIEWPORT_CHANGE':
-      return { ...state, isMobileViewport: action.payload.width < 600 };
+      return {
+        ...state,
+        currentTabIndex: correctIndex,
+        currentTabId: tabs[correctIndex].id
+      };
+    case ACTION_TYPE.VIEWPORT_CHANGE:
+      return {
+        ...state,
+        isMobileViewport: action.payload.width < env.ui.mobileMaxWidth
+      };
+    case ACTION_TYPE.TOGGLE_MENU:
+      return { ...state, isMenuOpen: !state.isMenuOpen };
     default:
       return state;
   }

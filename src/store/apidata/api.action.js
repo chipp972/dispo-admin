@@ -20,8 +20,22 @@ const generateCrudAction = (operation: string, dataName: string) => {
     try {
       const { authentication } = getState();
       const { token } = authentication;
-      console.log(data);
-      const res = await fetcher(token)[dataName][operation](...data);
+      console.log(data, 'data');
+      console.log(dataName, 'dataName');
+      console.log(operation, 'operation');
+      const args = {};
+      if (operation === 'edit') {
+        args.id = data[0]._id;
+        args.fields = data[0];
+      }
+      console.log(args);
+      let res;
+      if (operation === 'edit') {
+        res = await fetcher(token)[dataName][operation](args.id, args.fields);
+      } else {
+        res = await fetcher(token)[dataName][operation](...data);
+      }
+      console.log(res, 'api action');
       dispatch({
         type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_SUCCESS`,
         payload: res
