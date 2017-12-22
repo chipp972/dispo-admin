@@ -2,7 +2,8 @@
 import { connect } from 'react-redux';
 import {
   authenticate,
-  sendCode
+  sendCode,
+  resetEmail
 } from '../../../store/authentication/authentication.action';
 import { AuthForm } from './AuthForm';
 
@@ -13,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   authenticate: (email, code) => dispatch(authenticate(email, code)),
-  sendCode: (email: string) => dispatch(sendCode(email))
+  sendCode: (email: string) => dispatch(sendCode(email)),
+  resetEmail: () => dispatch(resetEmail())
 });
 
 export const AuthFormContainer = connect(mapStateToProps, mapDispatchToProps)(

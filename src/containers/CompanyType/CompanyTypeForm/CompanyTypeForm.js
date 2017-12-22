@@ -17,11 +17,17 @@ const initialState: CompanyTypeData = { name: '' };
 export const CompanyTypeForm = (props: CompanyTypeFormProps) => (
   <Form
     initialState={
-      props.isUpdate && props.initialState
-        ? props.initialState
-        : initialState
+      props.isUpdate && props.initialState ? props.initialState : initialState
     }
-    inputs={[{ id: 'name', label: "Type d'entreprise", type: 'text' }]}
+    inputs={[
+      {
+        id: 'name',
+        label: "Type d'entreprise",
+        type: 'text',
+        isValid: value => value.length > 0,
+        helperText: 'champ obligatoire'
+      }
+    ]}
     onSubmit={(formData: CompanyTypeData) => {
       props.isUpdate
         ? props.updateCompanyType(formData)

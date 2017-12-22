@@ -6,10 +6,10 @@ import { FormInput } from './FormInput';
 export type InputDescription = {
   id: string,
   label: string,
-  helperText?: string,
   type: 'select' | 'text' | 'date' | 'password',
   disabled?: boolean,
-  isValid?: (inputContent: string) => boolean
+  isValid?: (value: string) => boolean,
+  helperText?: string,
 };
 
 export type FormProps<T> = {

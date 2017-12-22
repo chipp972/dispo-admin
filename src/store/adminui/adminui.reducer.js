@@ -1,8 +1,8 @@
 // @flow
 import { TAB_ID, DIALOG_ID, ACTION_TYPE } from './adminui.constant';
 import env from '../../env';
-import type { AdminUIState } from './adminui.js.flow';
 import { tabs } from './adminui.constant';
+import type { AdminUIState } from './adminui.js.flow';
 
 const initialState: AdminUIState = {
   isMobileViewport: window.innerWidth < env.ui.mobileMaxWidth,

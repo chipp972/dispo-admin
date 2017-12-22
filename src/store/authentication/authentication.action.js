@@ -123,3 +123,8 @@ export const authenticate = (email: string, code: string) => async (
     });
   }
 };
+
+export const resetEmail = () => ({
+  type: ACTION_TYPE.RESET_EMAIL
+});
+

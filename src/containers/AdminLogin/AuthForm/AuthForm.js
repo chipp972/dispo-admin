@@ -7,7 +7,8 @@ type AuthFormProps = {
   email: string,
   canSendCode: boolean,
   authenticate: (email: string, code: string) => any,
-  sendCode: (email: string) => any
+  sendCode: (email: string) => any,
+  resetEmail: () => any
 };
 
 export const AuthForm = (props: AuthFormProps) => (
@@ -29,5 +30,6 @@ export const AuthForm = (props: AuthFormProps) => (
     >
       Renvoyer le code
     </Button>
+    <Button onClick={() => props.resetEmail()}>ANNULER</Button>
   </div>
 );

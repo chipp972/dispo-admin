@@ -10,7 +10,7 @@ const initialState: AuthenticationState = {
   code: '',
   canSendCode: true,
   isAuthenticated: false,
-  isCodeReceived: false,
+  isCodeReceived: false
 };
 
 export const authenticationReducer = (
@@ -39,13 +39,14 @@ export const authenticationReducer = (
     case ACTION_TYPE.SEND_CODE.FAILURE:
     case ACTION_TYPE.AUTHENTICATE.FAILURE:
     case ACTION_TYPE.TOKEN_REFRESH.FAILURE:
+    case ACTION_TYPE.RESET_EMAIL:
       return {
         ...state,
         email: '',
         code: '',
         isAuthenticated: false,
         canSendCode: true,
-        isCodeReceived: false,
+        isCodeReceived: false
       };
     case ACTION_TYPE.INVALID_OR_EXPIRED_TOKEN:
       return {
