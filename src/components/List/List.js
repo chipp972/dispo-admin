@@ -6,12 +6,15 @@ import {
   Avatar,
   ListItemText,
   ListItemSecondaryAction,
+  ListItemAvatar,
   IconButton
 } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
 import EditIcon from 'material-ui-icons/Edit';
+import { compose, slice, append } from 'ramda';
 
 type ListProps = {
+  isMobileViewport: boolean,
   itemList: any[],
   keyFun: (item: any) => string,
   imgFun?: (item: any) => string,
@@ -21,27 +24,51 @@ type ListProps = {
   openDeleteDialog: (item: any) => any
 };
 
+const MAX_LENGTH = 25;
+
+const shorten = (str: string) =>
+  str.length > MAX_LENGTH
+    ? compose(append('...'), slice(0, MAX_LENGTH))(str)
+    : str;
+
 export function List(props: ListProps) {
   return (
-    <MUIList>
+    <MUIList style={{ flex: 1 }}>
       {props.itemList.map(item => (
-        <ListItem button key={props.keyFun(item)}>
+        <ListItem
+          button
+          disableGutters
+          divider
+          key={props.keyFun(item)}
+          onClick={() => props.openEditDialog(item)}
+        >
           {props.imgFun && (
-            <Avatar>
-              <img src={props.imgFun(item)} alt={props.primaryFun(item)} />
-            </Avatar>
+            <ListItemAvatar>
+              <Avatar src={props.imgFun(item)} alt={props.primaryFun(item)} />
+            </ListItemAvatar>
           )}
           <ListItemText
-            primary={props.primaryFun(item)}
-            secondary={props.secondaryFun && props.secondaryFun(item)}
+            syle={{ flex: 1 }}
+            primary={
+              !props.isMobileViewport
+                ? props.primaryFun(item)
+                : shorten(props.primaryFun(item))
+            }
+            secondary={
+              !props.isMobileViewport &&
+              props.secondaryFun &&
+              props.secondaryFun(item)
+            }
           />
-          <ListItemSecondaryAction>
-            <IconButton
-              aria-label="edit"
-              onClick={() => props.openEditDialog(item)}
-            >
-              <EditIcon />
-            </IconButton>
+          <ListItemSecondaryAction style={{ flex: 0 }}>
+            {!props.isMobileViewport && (
+              <IconButton
+                aria-label="edit"
+                onClick={() => props.openEditDialog(item)}
+              >
+                <EditIcon />
+              </IconButton>
+            )}
             <IconButton
               aria-label="delete"
               onClick={() => props.openDeleteDialog(item)}

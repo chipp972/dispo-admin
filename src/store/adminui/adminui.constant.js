@@ -40,7 +40,7 @@ export const tabs = [
     id: TAB_ID.companyType,
     key: TAB_ID.companyType,
     IconComponent: WorkIcon,
-    label: `TYPE D'ENTREPRISE`,
+    label: 'TYPE',
     Content: CompanyTypeListContainer
   },
   {

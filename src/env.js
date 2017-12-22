@@ -10,6 +10,6 @@ export default {
     domain: process.env.REACT_APP_AUTH0_DOMAIN || ''
   },
   ui: {
-    mobileMaxWidth: process.env.REACT_APP_MOBILE_MAX_WIDTH || 600,
+    mobileMaxWidth: process.env.REACT_APP_MOBILE_MAX_WIDTH || 560,
   }
 };

@@ -5,6 +5,7 @@ import { openDialog } from '../../../store/adminui/adminui.action';
 import { DIALOG_ID } from '../../../store/adminui/adminui.constant';
 
 const mapStateToProps = (state, ownProps) => ({
+  isMobileViewport: state.adminui.isMobileViewport,
   itemList: state.apidata.companytype.list,
   keyFun: item => item._id,
   primaryFun: item => item.name

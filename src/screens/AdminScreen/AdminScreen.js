@@ -23,8 +23,8 @@ export const AdminScreen = (props: AdminScreenProps) => (
     }}
   >
     <SwipeableViews
-      style={{ flex: 1, padding: 30 }}
-      axis={'ltr' === 'rtl' ? 'x-reverse' : 'x'}
+      style={{ flex: 1, padding: 0 }}
+      axis="x"
       index={props.currentTabIndex}
       onChangeIndex={index => props.changeTab(index, tabs.length)}
     >
