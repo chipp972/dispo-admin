@@ -1,21 +1,19 @@
 // @flow
 import { ACTION_TYPE } from './authentication.constant';
-import type {
-  AuthenticationState,
-  AuthenticationAction
-} from './authentication';
+import env from '../../env';
+import type { AuthenticationState } from './authentication';
 
 const initialState: AuthenticationState = {
   email: '',
   code: '',
   canSendCode: true,
-  isAuthenticated: false,
+  isAuthenticated: !env.isAuthenticationActivated,
   isCodeReceived: false
 };
 
 export const authenticationReducer = (
   state: AuthenticationState = initialState,
-  action: AuthenticationAction
+  action: any
 ) => {
   switch (action.type) {
     case ACTION_TYPE.SEND_CODE.PENDING:
@@ -26,29 +24,27 @@ export const authenticationReducer = (
       const { email } = action.payload;
       return { ...state, email, isCodeReceived: true, canSendCode: false };
     case ACTION_TYPE.AUTHENTICATE.SUCCESS:
-    case ACTION_TYPE.TOKEN_REFRESH.SUCCESS:
     case ACTION_TYPE.RETRIEVE_TOKEN.SUCCESS:
       const { token, tokenId, expireAt } = action.payload;
       return {
         ...state,
         token,
         tokenId,
-        expireAt: new Date(expireAt),
+        expireAt,
         isAuthenticated: true
       };
     case ACTION_TYPE.SEND_CODE.FAILURE:
     case ACTION_TYPE.AUTHENTICATE.FAILURE:
-    case ACTION_TYPE.TOKEN_REFRESH.FAILURE:
     case ACTION_TYPE.RESET_EMAIL:
       return {
         ...state,
         email: '',
-        code: '',
         isAuthenticated: false,
         canSendCode: true,
         isCodeReceived: false
       };
     case ACTION_TYPE.INVALID_OR_EXPIRED_TOKEN:
+    case ACTION_TYPE.LOGOUT.SUCCESS:
       return {
         ...state,
         token: '',

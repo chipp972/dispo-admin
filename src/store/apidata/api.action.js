@@ -1,5 +1,6 @@
 // @flow
 import { dataAPI } from 'dispo-api';
+import io from 'socket.io-client';
 import env from '../../env';
 import type {
   CrudOperations,
@@ -8,11 +9,14 @@ import type {
   CompanyType,
   CompanyTypeData,
   User,
-  UserData
+  UserData,
+  CompanyPopularity,
+  CompanyPopularityData
 } from 'dispo-api';
 import type { Dispatch } from 'redux';
 
 const fetcher = dataAPI(fetch, env.api.url);
+const socket = io(env.api.websocketUrl);
 
 const generateCrudAction = (operation: string, dataName: string) => {
   return (...data: any) => async (dispatch: Dispatch, getState: () => any) => {
@@ -28,17 +32,32 @@ const generateCrudAction = (operation: string, dataName: string) => {
         args.fields = data[0];
       }
       console.log(args);
-      let res;
+      let payload;
       if (operation === 'edit') {
-        res = await fetcher(token)[dataName][operation](args.id, args.fields);
+        payload = await fetcher(token)[dataName][operation](
+          args.id,
+          args.fields
+        );
       } else {
-        res = await fetcher(token)[dataName][operation](...data);
+        payload = await fetcher(token)[dataName][operation](...data);
       }
-      console.log(res, 'api action');
-      dispatch({
-        type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_SUCCESS`,
-        payload: res
-      });
+      console.log(payload, 'api action');
+      // FIXME: double reception of the dispatch event
+      if (
+        operation !== 'getAll' ||
+        operation !== 'get' ||
+        dataName !== 'company'
+      ) {
+        dispatch({
+          type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_SUCCESS`,
+          payload
+        });
+      }
+      // emit on the websocket
+      //socket.emit(
+      //`${dataName.toUpperCase()}_${operation.toUpperCase()}`,
+      //payload
+      //);
     } catch (error) {
       dispatch({
         type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_FAILURE`,
@@ -51,7 +70,8 @@ const generateCrudAction = (operation: string, dataName: string) => {
 export type CrudAPI = {
   company: CrudOperations<CompanyData, Company>,
   companyType: CrudOperations<CompanyTypeData, CompanyType>,
-  user: CrudOperations<UserData, User>
+  user: CrudOperations<UserData, User>,
+  companyPopularity: CrudOperations<CompanyPopularityData, CompanyPopularity>
 };
 
 export const crud: CrudAPI = {
@@ -68,6 +88,13 @@ export const crud: CrudAPI = {
     create: generateCrudAction('create', 'companyType'),
     edit: generateCrudAction('edit', 'companyType'),
     remove: generateCrudAction('remove', 'companyType')
+  },
+  companyPopularity: {
+    getAll: generateCrudAction('getAll', 'companyPopularity'),
+    get: generateCrudAction('get', 'companyPopularity'),
+    create: generateCrudAction('create', 'companyPopularity'),
+    edit: generateCrudAction('edit', 'companyPopularity'),
+    remove: generateCrudAction('remove', 'companyPopularity')
   },
   user: {
     getAll: generateCrudAction('getAll', 'user'),

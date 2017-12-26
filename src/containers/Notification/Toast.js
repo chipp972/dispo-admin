@@ -4,21 +4,23 @@ import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
 import CloseIcon from 'material-ui-icons/Close';
 
-type SnackbarErrorProps = {
-  errorList: string[],
-  hideError: () => any
+type ToastProps = {
+  canShow: boolean,
+  messageList: string[],
+  messageColor: string,
+  hideMessage: () => any
 };
 
-export const SnackbarError = (props: SnackbarErrorProps) => (
+export const Toast = (props: ToastProps) => (
   <Snackbar
     anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-    open={props.errorList.length > 0}
+    open={props.canShow}
     autoHideDuration={2000}
-    onRequestClose={props.hideError}
+    onRequestClose={props.hideMessage}
     SnackbarContentProps={{ 'aria-describedby': 'message-id' }}
     message={
-      <span id="message-id">
-        {props.errorList.length > 0 && props.errorList[0]}
+      <span id="message-id" style={{ color: props.messageColor }}>
+        {props.messageList.length > 0 && props.messageList[0]}
       </span>
     }
     action={[
@@ -26,7 +28,7 @@ export const SnackbarError = (props: SnackbarErrorProps) => (
         key="close"
         aria-label="Close"
         color="inherit"
-        onClick={props.hideError}
+        onClick={props.hideMessage}
       >
         <CloseIcon />
       </IconButton>

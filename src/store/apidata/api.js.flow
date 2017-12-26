@@ -1,5 +1,5 @@
 // @flow
-import type { Company, User, CompanyType } from 'dispo-api';
+import type { Company, User, CompanyType, CompanyPopularity } from 'dispo-api';
 
 export type APIDataState = {
   [string]: {
@@ -13,6 +13,10 @@ export type APIDataState = {
   companytype: {
     list: CompanyType[],
     byId?: { [string]: CompanyType }
+  },
+  companypopularity: {
+    list: CompanyPopularity[],
+    byId?: { [string]: CompanyPopularity }
   },
   user: {
     list: User[],

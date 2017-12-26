@@ -4,9 +4,9 @@ import { createAsyncActionType } from '../helper';
 export const ACTION_TYPE = {
   STORE_TOKEN: createAsyncActionType('STORE_TOKEN'),
   RETRIEVE_TOKEN: createAsyncActionType('RETRIEVE_TOKEN'),
-  TOKEN_REFRESH: createAsyncActionType('TOKEN_REFRESH'),
   SEND_CODE: createAsyncActionType('SEND_CODE'),
   AUTHENTICATE: createAsyncActionType('AUTHENTICATE'),
+  LOGOUT: createAsyncActionType('LOGOUT'),
   INVALID_OR_EXPIRED_TOKEN: 'INVALID_OR_EXPIRED_TOKEN',
   ENABLE_CODE_SENDING: 'ENABLE_CODE_SENDING',
   RESET_EMAIL: 'RESET_EMAIL'

@@ -7,10 +7,7 @@ import {
 } from './authentication.constant';
 import env from '../../env';
 import type { AuthRes } from 'dispo-api';
-import type {
-  StoreTokenAction,
-  AuthenticationState
-} from './authentication.js.flow';
+import type { AuthenticationState } from './authentication.js.flow';
 
 type GetState = () => AuthenticationState;
 type ThunkAction<A> = (dispatch: Dispatch<A>, getState: GetState) => any;
@@ -18,11 +15,11 @@ type Dispatch<A> = (action: A | ThunkAction<*>) => any;
 
 const fetcher = authAPI(fetch, env.api.url);
 
-export const storeToken: ThunkAction<StoreTokenAction> = ({
+export const storeToken: ThunkAction<*> = ({
   token,
   tokenId,
   expireAt
-}: AuthRes) => async (dispatch: Dispatch<StoreTokenAction>) => {
+}: AuthRes) => async (dispatch: Dispatch<*>) => {
   try {
     localStorage.setItem(LOCAL_STORAGE.TOKEN, token);
     localStorage.setItem(LOCAL_STORAGE.TOKEN_ID, tokenId);
@@ -35,18 +32,15 @@ export const storeToken: ThunkAction<StoreTokenAction> = ({
 
 export const retrieveToken = () => async (dispatch: Dispatch<*>) => {
   try {
-    const expireAtString = localStorage.getItem(LOCAL_STORAGE.EXPIRE_AT);
+    const expireAtSeconds = localStorage.getItem(LOCAL_STORAGE.EXPIRE_AT);
     const payload = {
       token: localStorage.getItem(LOCAL_STORAGE.TOKEN) || '',
       tokenId: localStorage.getItem(LOCAL_STORAGE.TOKEN_ID),
-      expireAt: expireAtString ? new Date(expireAtString) : new Date()
+      expireAt: parseInt(expireAtSeconds, 10) || Date.now() / 1000
     };
 
-    const now = new Date();
-    if (
-      now.getTime() < payload.expireAt.getTime() &&
-      payload.token.length > 0
-    ) {
+    const now = Date.now() / 1000;
+    if (now < payload.expireAt && payload.token.length > 0) {
       return dispatch({
         type: ACTION_TYPE.RETRIEVE_TOKEN.SUCCESS,
         payload
@@ -55,26 +49,6 @@ export const retrieveToken = () => async (dispatch: Dispatch<*>) => {
     return dispatch({ type: ACTION_TYPE.INVALID_OR_EXPIRED_TOKEN });
   } catch (error) {
     return dispatch({ type: ACTION_TYPE.RETRIEVE_TOKEN.FAILURE, error });
-  }
-};
-
-export const refreshToken = () => async (
-  dispatch: Dispatch<*>,
-  getState: () => any
-) => {
-  try {
-    dispatch({
-      type: ACTION_TYPE.TOKEN_REFRESH.PENDING
-    });
-    const { authentication } = getState();
-    const { tokenId, email, code } = authentication;
-    const res = await fetcher.admin.refreshToken({ tokenId, email, code });
-    dispatch({
-      type: ACTION_TYPE.TOKEN_REFRESH.SUCCESS,
-      payload: res
-    });
-  } catch (error) {
-    return dispatch({ type: ACTION_TYPE.TOKEN_REFRESH.FAILURE, error });
   }
 };
 
@@ -128,3 +102,23 @@ export const resetEmail = () => ({
   type: ACTION_TYPE.RESET_EMAIL
 });
 
+export const logout = () => async (dispatch: Dispatch<*>) => {
+  try {
+    dispatch({
+      type: ACTION_TYPE.LOGOUT.PENDING
+    });
+    const tokenId = localStorage.getItem(LOCAL_STORAGE.TOKEN_ID);
+    await fetcher.admin.logout(tokenId);
+    localStorage.removeItem(LOCAL_STORAGE.TOKEN);
+    localStorage.removeItem(LOCAL_STORAGE.TOKEN_ID);
+    localStorage.removeItem(LOCAL_STORAGE.EXPIRE_AT);
+    dispatch({
+      type: ACTION_TYPE.LOGOUT.SUCCESS
+    });
+  } catch (error) {
+    dispatch({
+      type: ACTION_TYPE.LOGOUT.FAILURE,
+      error
+    });
+  }
+};

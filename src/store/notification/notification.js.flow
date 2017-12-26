@@ -1,0 +1,6 @@
+// @flow
+
+export type NotificationHandlerState = {
+  +errorList: string[],
+  +infoList: string[]
+};

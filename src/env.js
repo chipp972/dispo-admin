@@ -1,5 +1,9 @@
 // @flow
 export default {
+  nodeEnv: process.env.REACT_APP_NODE_ENV || 'production',
+  isAuthenticationActivated: process.env.REACT_APP_IS_AUTHENTICATION_ACTIVATED
+    ? process.env.REACT_APP_IS_AUTHENTICATION_ACTIVATED === '1'
+    : true,
   api: {
     url: process.env.REACT_APP_API_URL || '/',
     websocketUrl: process.env.REACT_APP_WS_URL || '/'
@@ -10,6 +14,6 @@ export default {
     domain: process.env.REACT_APP_AUTH0_DOMAIN || ''
   },
   ui: {
-    mobileMaxWidth: process.env.REACT_APP_MOBILE_MAX_WIDTH || 560,
+    mobileMaxWidth: process.env.REACT_APP_MOBILE_MAX_WIDTH || 560
   }
 };

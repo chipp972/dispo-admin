@@ -1,5 +1,0 @@
-// @flow
-
-export type ErrorHandlerState = {
-  +errorList: string[]
-};

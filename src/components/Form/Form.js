@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormControl, FormHelperText, Button } from 'material-ui';
+import { compose, filter, not, propEq } from 'ramda';
 import { FormInput } from './FormInput';
 
 export type InputDescription = {
@@ -10,6 +11,7 @@ export type InputDescription = {
   disabled?: boolean,
   isValid?: (value: string) => boolean,
   helperText?: string,
+  isFiltered?: boolean
 };
 
 export type FormProps<T> = {
@@ -45,7 +47,9 @@ export class Form<T> extends Component<FormProps<T>, *> {
       !inputDescription.isValid(this.state[inputDescription.id]);
     return (
       <form style={{ display: 'flex', flexFlow: 'column wrap', padding: 20 }}>
-        {this.props.inputs.map((inputDescription: InputDescription) => (
+        {filter(compose(not, propEq('isFiltered', true)))(
+          this.props.inputs
+        ).map((inputDescription: InputDescription) => (
           <FormControl
             key={`formcontrol_${inputDescription.id}`}
             disabled={inputDescription.disabled}

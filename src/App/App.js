@@ -2,8 +2,9 @@
 import React from 'react';
 import { HeaderContainer } from '../containers/Header/HeaderContainer';
 import { RouterContainer } from '../containers/Router/RouterContainer';
-import { ErrorContainer } from '../containers/Error/ErrorContainer';
 import { MenuContainer } from '../containers/Menu/MenuContainer';
+import { ErrorContainer } from '../containers/Notification/ErrorContainer';
+import { InfoContainer } from '../containers/Notification/InfoContainer';
 import './App.css';
 
 type AppProps = {};
@@ -21,5 +22,6 @@ export const App = (props: AppProps) => (
     <MenuContainer />
     <RouterContainer />
     <ErrorContainer />
+    <InfoContainer />
   </div>
 );
