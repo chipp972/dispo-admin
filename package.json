@@ -13,7 +13,7 @@
     "inspect": "jsinspect ./src"
   },
   "dependencies": {
-
+    "@mars/heroku-js-runtime-env": "3.0.2",
     "dispo-api": "git+https://d09a8666eaa2b3a3f64d9efb69c7cc2e29c483d5@github.com/chipp972/dispo-api.git",
     "material-ui": "1.0.0-beta.21",
     "material-ui-icons": "1.0.0-beta.17",

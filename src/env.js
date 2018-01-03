@@ -1,19 +1,23 @@
 // @flow
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+
+const env = runtimeEnv();
+
 export default {
-  nodeEnv: process.env.REACT_APP_NODE_ENV || 'production',
-  isAuthenticationActivated: process.env.REACT_APP_IS_AUTHENTICATION_ACTIVATED
-    ? process.env.REACT_APP_IS_AUTHENTICATION_ACTIVATED === '1'
+  nodeEnv: env.REACT_APP_NODE_ENV || 'production',
+  isAuthenticationActivated: env.REACT_APP_IS_AUTHENTICATION_ACTIVATED
+    ? env.REACT_APP_IS_AUTHENTICATION_ACTIVATED === '1'
     : true,
   api: {
-    url: process.env.REACT_APP_API_URL || '/',
-    websocketUrl: process.env.REACT_APP_WS_URL || '/'
+    url: env.REACT_APP_API_URL || '/',
+    websocketUrl: env.REACT_APP_WS_URL || '/'
   },
   auth0: {
-    url: process.env.REACT_APP_AUTH0_URL || '/',
-    clientId: process.env.REACT_APP_AUTH0_CLIENT_ID || '',
-    domain: process.env.REACT_APP_AUTH0_DOMAIN || ''
+    url: env.REACT_APP_AUTH0_URL || '/',
+    clientId: env.REACT_APP_AUTH0_CLIENT_ID || '',
+    domain: env.REACT_APP_AUTH0_DOMAIN || ''
   },
   ui: {
-    mobileMaxWidth: process.env.REACT_APP_MOBILE_MAX_WIDTH || 560
+    mobileMaxWidth: env.REACT_APP_MOBILE_MAX_WIDTH || 560
   }
 };
