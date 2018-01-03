@@ -21,8 +21,9 @@ const socket = io(env.api.websocketUrl);
 const generateCrudAction = (operation: string, dataName: string) => {
   return (...data: any) => async (dispatch: Dispatch, getState: () => any) => {
     try {
-      const { authentication } = getState();
+      const { authentication, apidata } = getState();
       const { token } = authentication;
+      const { isWebsocketReady } = apidata;
       console.log(data, 'data');
       console.log(dataName, 'dataName');
       console.log(operation, 'operation');
@@ -42,22 +43,13 @@ const generateCrudAction = (operation: string, dataName: string) => {
         payload = await fetcher(token)[dataName][operation](...data);
       }
       console.log(payload, 'api action');
-      // FIXME: double reception of the dispatch event
-      if (
-        operation !== 'getAll' ||
-        operation !== 'get' ||
-        dataName !== 'company'
-      ) {
+      // if websocket is not initialised we use the ajax response
+      if (!isWebsocketReady) {
         dispatch({
           type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_SUCCESS`,
           payload
         });
       }
-      // emit on the websocket
-      //socket.emit(
-      //`${dataName.toUpperCase()}_${operation.toUpperCase()}`,
-      //payload
-      //);
     } catch (error) {
       dispatch({
         type: `${operation.toUpperCase()}_${dataName.toUpperCase()}_FAILURE`,

@@ -3,6 +3,7 @@ import { addToState, convertToMap, removeFromState } from './api.helper';
 import type { APIDataState } from './api.js.flow';
 
 const initialState: APIDataState = {
+  isWebsocketInitialised: false,
   company: { list: [], byId: {} },
   companytype: { list: [], byId: {} },
   user: { list: [], byId: {} },
@@ -13,6 +14,11 @@ export const apiDataReducer = (
   state: APIDataState = initialState,
   action: any
 ) => {
+  if (action.type === 'WEBSOCKET_CONNECTED') {
+    return { ...state, isWebsocketReady: true };
+  } else if (action.type === 'WEBSOCKET_DISCONNECTED') {
+    return { ...state, isWebsocketReady: false };
+  }
   const re = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(action.type);
   if (!re || re.length < 4) return state;
   const [, actionType, modelName, status] = re;

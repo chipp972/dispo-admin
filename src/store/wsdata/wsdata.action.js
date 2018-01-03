@@ -19,6 +19,18 @@ const EVENTS = {
 export const handleWebsocketEvents = (appStore: Store, token: string) => {
   const socket = io(env.api.websocketUrl);
 
+  socket.on('connect', () =>
+    appStore.dispatch({
+      type: 'WEBSOCKET_CONNECTED'
+    })
+  );
+
+  socket.on('disconnect', () =>
+    appStore.dispatch({
+      type: 'WEBSOCKET_DISCONNECTED'
+    })
+  );
+
   socket.on(EVENTS.COMPANY.create, company => {
     appStore.dispatch({
       type: 'CREATE_COMPANY_SUCCESS',
