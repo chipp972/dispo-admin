@@ -8,8 +8,8 @@ import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 
 const mapStateToProps = (state, ownProps) => ({
   title: 'ATTENTION',
-  contentText: `Etes-vous sur de vouloir supprimer cet utilisateur ?<br>
-  Les entreprises qui utilisent ce type risque d'etre supprime`,
+  contentText: `Êtes-vous sûr de vouloir supprimer cet utilisateur ?
+  Les entreprises de cet utilisateur seront aussi supprimées !`,
   dialogContent: state.adminui.dialogContent,
   isDialogOpen:
     state.adminui.currentOpenDialog === DIALOG_ID.delete &&
