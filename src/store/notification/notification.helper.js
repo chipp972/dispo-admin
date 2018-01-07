@@ -7,13 +7,13 @@
  */
 export const toUserFriendly = (rawMessage: string): string => {
   if (/duplicate key error/.test(rawMessage)) {
-    return 'Cet identifiant est unique';
+    return 'Ce champs doit être unique';
   } else if (/invalid old password/.test(rawMessage)) {
     return "L'ancien mot de passe est invalide";
   } else if (/No recipients defined/.test(rawMessage)) {
     return "L'adresse email est invalide";
   } else if (/maps.googleapis.com/.test(rawMessage)) {
-    return "Probleme lors de la verification d'adresse";
+    return "Problème lors de la vérification d'adresse";
   }
   return "Une erreur s'est produite";
 };
@@ -26,7 +26,13 @@ export const toUserFriendly = (rawMessage: string): string => {
 export const isHandledActionType = (actionType: string): boolean => {
   const apiActionRegex = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(actionType);
   if (!apiActionRegex || apiActionRegex.length < 4) return false;
-  if (apiActionRegex[2] !== 'COMPANY') return false;
+  if (
+    apiActionRegex[1] === 'READ' ||
+    apiActionRegex[1] === 'GETALL' ||
+    apiActionRegex[1] === 'GET'
+  ) {
+    return false;
+  }
   return true;
 };
 
@@ -37,9 +43,9 @@ export const modelNameToMessage = (modelName: string) => {
     case 'USER':
       return 'Un utilisateur ';
     case 'COMPANYTYPE':
-      return 'Une entreprise ';
+      return "Un type d'entreprise ";
     case 'COMPANY_POPULARITY':
-      return 'Un utilisateur a clique sur une entreprise';
+      return 'Un utilisateur a cliqué sur une entreprise';
     default:
       return '';
   }
@@ -58,11 +64,11 @@ export const toMessage = (actionType: string): string => {
   if (subject.length === 0 || subject.length > 25) return subject;
   switch (action) {
     case 'CREATE':
-      return `${subject} a ete cree`;
+      return `${subject} a été crée`;
     case 'EDIT':
-      return `${subject} a ete modifiee`;
+      return `${subject} a été modifié(e)`;
     case 'REMOVE':
-      return `${subject} a ete supprimee`;
+      return `${subject} a été supprimé(e)`;
     default:
       return '';
   }
