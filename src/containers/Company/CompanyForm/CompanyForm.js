@@ -56,6 +56,7 @@ const inputs: InputDescription[] = [
     helperText: 'Contient 14 lettres et chiffres'
   },
   { id: 'imageUrl', label: 'image', type: 'text' },
+  { id: 'companyImage', label: 'logo', type: 'file' },
   {
     id: 'address',
     label: 'Adresse',

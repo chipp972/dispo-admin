@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   confirmAction: (item: CompanyType) =>
-    dispatch(crud.companyType.remove(item._id)),
+    dispatch(crud.companyType.remove(item)),
   closeDialog: () => dispatch(closeDialog())
 });
 
