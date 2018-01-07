@@ -26,7 +26,6 @@ const generateCrudAction = (operation: string, dataName: string) => {
       const { authentication, apidata } = getState();
       const { token } = authentication;
       const { isWebsocketReady } = apidata;
-      console.log(data);
       const formData = new FormData();
       forEachObjIndexed(appendToFormData(formData), data);
       const payload =

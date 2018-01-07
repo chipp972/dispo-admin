@@ -14,6 +14,8 @@ export const toUserFriendly = (rawMessage: string): string => {
     return "L'adresse email est invalide";
   } else if (/maps.googleapis.com/.test(rawMessage)) {
     return "Problème lors de la vérification d'adresse";
+  } else if (/geometry/.test(rawMessage)) {
+    return "Adresse invalide";
   }
   return "Une erreur s'est produite";
 };

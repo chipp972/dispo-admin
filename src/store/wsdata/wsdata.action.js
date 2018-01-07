@@ -21,7 +21,6 @@ const EVENTS = {
 
 export const handleWebsocketEvents = (appStore: Store, token: string) => {
   const socket = io.connect(env.api.url);
-  console.log(socket);
 
   socket.on('connect', () =>
     appStore.dispatch({
