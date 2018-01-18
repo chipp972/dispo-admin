@@ -30,7 +30,7 @@ export const apiDataReducer = (
         ...state,
         [name]: {
           list: action.payload,
-          byId: convertToMap(action.payload)
+          byId: convertToMap(action.payload || [])
         }
       };
     case 'GET':

@@ -17,6 +17,10 @@ export const openDialog = ({
   payload: { dialogId, dialogContent }
 });
 
+export const openRegisterDialog = () => ({
+  type: ACTION_TYPE.OPEN_REGISTER_DIALOG
+});
+
 export const closeDialog = () => ({
   type: ACTION_TYPE.CLOSE_DIALOG
 });

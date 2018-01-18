@@ -19,7 +19,7 @@ const EVENTS = {
   COMPANY_POPULARITY: crudEvents('COMPANYPOPULARITY')
 };
 
-export const handleWebsocketEvents = (appStore: Store, token: string) => {
+export const handleWebsocketEvents = (appStore: Store) => {
   const socket = io.connect(env.api.url);
 
   socket.on('connect', () =>

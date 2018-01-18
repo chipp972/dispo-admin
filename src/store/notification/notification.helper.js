@@ -15,27 +15,13 @@ export const toUserFriendly = (rawMessage: string): string => {
   } else if (/maps.googleapis.com/.test(rawMessage)) {
     return "Problème lors de la vérification d'adresse";
   } else if (/geometry/.test(rawMessage)) {
-    return "Adresse invalide";
+    return 'Adresse invalide';
+  } else if (/user not found/i.test(rawMessage)) {
+    return 'Email ou mot de passe incorrect';
+  } else if (/operation not permitted/i.test(rawMessage)) {
+    return 'Un compte administrateur est necessaire pour cette action';
   }
   return "Une erreur s'est produite";
-};
-
-/**
- * determine if tthe action type has an associated message
- * @param {string} actionType
- * @return {boolean}
- */
-export const isHandledActionType = (actionType: string): boolean => {
-  const apiActionRegex = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(actionType);
-  if (!apiActionRegex || apiActionRegex.length < 4) return false;
-  if (
-    apiActionRegex[1] === 'READ' ||
-    apiActionRegex[1] === 'GETALL' ||
-    apiActionRegex[1] === 'GET'
-  ) {
-    return false;
-  }
-  return true;
 };
 
 export const modelNameToMessage = (modelName: string) => {

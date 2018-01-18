@@ -5,7 +5,8 @@ import { toggleMenu } from '../../store/adminui/adminui.action';
 import { logout } from '../../store/authentication/authentication.action';
 
 const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.authentication.isAuthenticated,
+  isAdminAuthenticated: state.authentication.isAdminAuthenticated,
+  isUserAuthenticated: state.authentication.isUserAuthenticated,
   isMenuOpen: state.adminui.isMenuOpen
 });
 

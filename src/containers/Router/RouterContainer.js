@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Router } from './Router';
 
 const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.authentication.isAuthenticated
+  isAdminAuthenticated: state.authentication.isAdminAuthenticated,
+  isUserAuthenticated: state.authentication.isUserAuthenticated
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({});
