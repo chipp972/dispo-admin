@@ -7,7 +7,11 @@ import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 
 const mapStateToProps = (state, ownProps) => ({
   isMobileViewport: state.adminui.isMobileViewport,
-  title: state.isAuthenticated ? 'UTILISATEUR' : 'INSCRIPTION',
+  title:
+    state.authentication.isAdminAuthenticated ||
+    state.authentication.isUserAuthenticated
+      ? 'UTILISATEUR'
+      : 'INSCRIPTION',
   Content: UserFormContainer,
   isDialogOpen:
     (state.adminui.currentOpenDialog === DIALOG_ID.create ||

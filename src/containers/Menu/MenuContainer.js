@@ -12,7 +12,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleMenu: () => dispatch(toggleMenu()),
-  logout: () => dispatch(logout())
+  logout: () => {
+    dispatch(logout());
+    dispatch(toggleMenu());
+  }
 });
 
 export const MenuContainer = connect(mapStateToProps, mapDispatchToProps)(Menu);

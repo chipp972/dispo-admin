@@ -17,7 +17,8 @@ const mapStateToProps = (state, ownProps) => ({
     ...state.adminui.dialogContent,
     birthDate: formatDate(state.adminui.dialogContent.birthDate)
   },
-  isAuthenticated: state.authentication.isAuthenticated,
+  isUserAuthenticated: state.authentication.isUserAuthenticated,
+  isAdminAuthenticated: state.authentication.isAdminAuthenticated,
   isUpdate: state.adminui.currentOpenDialog === DIALOG_ID.update,
   isDialogOpen:
     (state.adminui.currentOpenDialog === DIALOG_ID.create ||

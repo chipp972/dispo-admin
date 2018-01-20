@@ -6,24 +6,32 @@ import {
   CODE_SENDING_DELAY
 } from './authentication.constant';
 import env from '../../env';
-import type { AuthResponse, UserData } from 'dispo-api';
+import type { UserData } from 'dispo-api';
 import type { AuthenticationState } from './authentication.js.flow';
 
 type GetState = () => AuthenticationState;
-type ThunkAction<A> = (dispatch: Dispatch<A>, getState: GetState) => any;
+type ThunkAction<A> = (any) => (dispatch: Dispatch<A>, getState: GetState) => any;
 type Dispatch<A> = (action: A | ThunkAction<*>) => any;
+type AuthResponse = {
+  token: string,
+  tokenId: string,
+  expireAt: number,
+  isAdmin: boolean
+};
 
 const fetcher = authAPI(fetch, env.api.url);
 
-export const storeToken: ThunkAction<*> = (
-  { token, tokenId, expireAt }: AuthResponse,
-  { isAdmin }: { isAdmin: string }
-) => async (dispatch: Dispatch<*>) => {
+export const storeToken: ThunkAction<*> = ({
+  token,
+  tokenId,
+  expireAt,
+  isAdmin
+}: AuthResponse) => async (dispatch: Dispatch<*>) => {
   try {
     localStorage.setItem(LOCAL_STORAGE.TOKEN, token);
     localStorage.setItem(LOCAL_STORAGE.TOKEN_ID, tokenId);
     localStorage.setItem(LOCAL_STORAGE.EXPIRE_AT, expireAt);
-    localStorage.setItem(LOCAL_STORAGE.IS_ADMIN, isAdmin);
+    localStorage.setItem(LOCAL_STORAGE.IS_ADMIN, isAdmin ? '1' : '0');
     return dispatch({ type: ACTION_TYPE.STORE_TOKEN.SUCCESS });
   } catch (error) {
     return dispatch({ type: ACTION_TYPE.STORE_TOKEN.FAILURE, error });
@@ -86,11 +94,12 @@ export const authenticate = (email: string, code: string) => async (
       type: ACTION_TYPE.AUTHENTICATE.PENDING
     });
     const res = await fetcher.admin.authenticate({ email, code });
+    const payload = { ...res, isAdmin: true };
     dispatch({
       type: ACTION_TYPE.AUTHENTICATE.SUCCESS,
-      payload: { ...res }
+      payload
     });
-    return dispatch(storeToken(res, { isAdmin: '1' }));
+    return dispatch(storeToken(payload));
   } catch (error) {
     dispatch({
       type: ACTION_TYPE.AUTHENTICATE.FAILURE,
@@ -103,16 +112,25 @@ export const resetEmail = () => ({
   type: ACTION_TYPE.RESET_EMAIL
 });
 
-export const logout = () => async (dispatch: Dispatch<*>) => {
+export const logout = () => async (
+  dispatch: Dispatch<*>,
+  getState: GetState
+) => {
   try {
     dispatch({
       type: ACTION_TYPE.LOGOUT.PENDING
     });
+    const { isAdminAuthenticated, isUserAuthenticated } = getState();
     const tokenId = localStorage.getItem(LOCAL_STORAGE.TOKEN_ID);
-    await fetcher.admin.logout(tokenId);
+    if (isAdminAuthenticated) {
+      await fetcher.admin.logout(tokenId);
+    } else if (isUserAuthenticated) {
+      await fetcher.user.logout(tokenId);
+    }
     localStorage.removeItem(LOCAL_STORAGE.TOKEN);
     localStorage.removeItem(LOCAL_STORAGE.TOKEN_ID);
     localStorage.removeItem(LOCAL_STORAGE.EXPIRE_AT);
+    localStorage.removeItem(LOCAL_STORAGE.IS_ADMIN);
     dispatch({
       type: ACTION_TYPE.LOGOUT.SUCCESS
     });
@@ -130,11 +148,12 @@ export const userLogin = (email: string, password: string) => async (
   try {
     dispatch({ type: ACTION_TYPE.USER_LOGIN.PENDING });
     const res = await fetcher.user.login({ email, password });
+    const payload = { ...res, isAdmin: false };
     dispatch({
       type: ACTION_TYPE.USER_LOGIN.SUCCESS,
-      payload: { ...res }
+      payload
     });
-    return dispatch(storeToken(res, { isAdmin: '0' }));
+    return dispatch(storeToken(payload));
   } catch (error) {
     dispatch({
       type: ACTION_TYPE.USER_LOGIN.FAILURE,
