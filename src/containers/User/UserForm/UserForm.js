@@ -5,10 +5,13 @@ import type { UserData, User } from 'dispo-api';
 
 type UserFormProps = {
   initialState?: User,
+  isUserAuthenticated: boolean,
+  isAdminAuthenticated: boolean,
   isUpdate: boolean,
   isDialogOpen: boolean,
   createUser: (formData: UserData) => any,
   updateUser: (formData: UserData) => any,
+  registerUser: (formData: UserData) => any,
   closeDialog: () => any
 };
 
@@ -47,9 +50,17 @@ export const UserForm = (props: UserFormProps) => (
       { id: 'address', label: 'Adresse', type: 'text' }
     ]}
     onSubmit={(formData: UserData) => {
-      props.isUpdate ? props.updateUser(formData) : props.createUser(formData);
+      props.isUserAuthenticated || props.isAdminAuthenticated
+        ? props.isUpdate
+          ? props.updateUser(formData)
+          : props.createUser(formData)
+        : props.registerUser(formData);
       if (props.isDialogOpen) props.closeDialog();
     }}
-    onSubmitLabel={`${props.isUpdate ? 'MODIFIER' : 'CREER'} UN UTILISATEUR`}
+    onSubmitLabel={
+      props.isUserAuthenticated || props.isAdminAuthenticated
+        ? `${props.isUpdate ? 'MODIFIER' : 'CREER'} UN UTILISATEUR`
+        : 'INSCRIPTION'
+    }
   />
 );

@@ -40,10 +40,26 @@ export const FormInput = ({
           ))}
         </Select>
       ];
+    case 'file':
+      return [
+        <InputLabel key={`inputlabel_${id}`} htmlFor={id}>
+          {label}
+        </InputLabel>,
+        <Input
+          id={id}
+          name={id}
+          key={`inputfile_${id}`}
+          type={type}
+          onChange={handleInputChange(id)}
+          error={isValid && !isValid(value)}
+          disabled={disabled}
+        />
+      ];
     default:
       return (
         <TextField
           id={id}
+          name={id}
           label={label}
           type={type}
           value={value}

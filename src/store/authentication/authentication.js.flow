@@ -5,6 +5,8 @@ export type AuthenticationState = {
   +tokenId?: string,
   +expireAt?: number,
   +canSendCode: boolean,
-  +isAuthenticated: boolean,
-  +isCodeReceived: boolean
+  +isAdminAuthenticated: boolean,
+  +isUserAuthenticated: boolean,
+  +isCodeReceived: boolean,
+  +isAuthenticationPending: boolean
 };

@@ -1,7 +1,9 @@
 // @flow
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import Logger from 'redux-logger';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { history } from './history';
 import { dispoAdmin } from './rootReducer';
 import { retrieveToken } from './authentication/authentication.action';
 import { handleViewportChange } from './adminui/adminui.action';
@@ -11,15 +13,23 @@ import env from '../env';
 import type { Store } from 'redux';
 
 const isProd = env.nodeEnv === 'production';
+
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   : compose;
 
 const middlewares = isProd
-  ? compose(applyMiddleware(ReduxThunk))
-  : composeEnhancers(applyMiddleware(ReduxThunk, Logger));
+  ? compose(applyMiddleware(ReduxThunk, routerMiddleware(history)))
+  : composeEnhancers(
+      applyMiddleware(ReduxThunk, routerMiddleware(history), Logger)
+    );
 
-export const store = createStore(dispoAdmin, {}, middlewares);
+export const store = createStore(
+  combineReducers({ ...dispoAdmin, router: routerReducer }),
+  {},
+  middlewares
+);
 
 /**
  * fetch API data if authenticated
@@ -28,8 +38,8 @@ export const store = createStore(dispoAdmin, {}, middlewares);
  */
 const initAPIData = (appStore: Store) => {
   const { authentication } = appStore.getState();
-  const { isAuthenticated, token } = authentication;
-  if (!isAuthenticated) return false;
+  const { isAdminAuthenticated, isUserAuthenticated} = authentication;
+  if (!(isAdminAuthenticated || isUserAuthenticated)) return false;
 
   // get all data from the api
   appStore.dispatch(crud.company.getAll());
@@ -37,7 +47,7 @@ const initAPIData = (appStore: Store) => {
   appStore.dispatch(crud.companyType.getAll());
   appStore.dispatch(crud.companyPopularity.getAll());
   // register actions on websocket events
-  handleWebsocketEvents(appStore, token);
+  handleWebsocketEvents(appStore);
   return true;
 };
 

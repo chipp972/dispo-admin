@@ -7,27 +7,21 @@
  */
 export const toUserFriendly = (rawMessage: string): string => {
   if (/duplicate key error/.test(rawMessage)) {
-    return 'Cet identifiant est unique';
+    return 'Ce champs doit être unique';
   } else if (/invalid old password/.test(rawMessage)) {
     return "L'ancien mot de passe est invalide";
   } else if (/No recipients defined/.test(rawMessage)) {
     return "L'adresse email est invalide";
   } else if (/maps.googleapis.com/.test(rawMessage)) {
-    return "Probleme lors de la verification d'adresse";
+    return "Problème lors de la vérification d'adresse";
+  } else if (/geometry/.test(rawMessage)) {
+    return 'Adresse invalide';
+  } else if (/user not found/i.test(rawMessage)) {
+    return 'Email ou mot de passe incorrect';
+  } else if (/operation not permitted/i.test(rawMessage)) {
+    return 'Un compte administrateur est necessaire pour cette action';
   }
   return "Une erreur s'est produite";
-};
-
-/**
- * determine if tthe action type has an associated message
- * @param {string} actionType
- * @return {boolean}
- */
-export const isHandledActionType = (actionType: string): boolean => {
-  const apiActionRegex = /([A-Z]+)_([A-Z]+)_([A-Z]+)/.exec(actionType);
-  if (!apiActionRegex || apiActionRegex.length < 4) return false;
-  if (apiActionRegex[2] !== 'COMPANY') return false;
-  return true;
 };
 
 export const modelNameToMessage = (modelName: string) => {
@@ -37,9 +31,9 @@ export const modelNameToMessage = (modelName: string) => {
     case 'USER':
       return 'Un utilisateur ';
     case 'COMPANYTYPE':
-      return 'Une entreprise ';
+      return "Un type d'entreprise ";
     case 'COMPANY_POPULARITY':
-      return 'Un utilisateur a clique sur une entreprise';
+      return 'Un utilisateur a cliqué sur une entreprise';
     default:
       return '';
   }
@@ -58,11 +52,11 @@ export const toMessage = (actionType: string): string => {
   if (subject.length === 0 || subject.length > 25) return subject;
   switch (action) {
     case 'CREATE':
-      return `${subject} a ete cree`;
+      return `${subject} a été crée`;
     case 'EDIT':
-      return `${subject} a ete modifiee`;
+      return `${subject} a été modifié(e)`;
     case 'REMOVE':
-      return `${subject} a ete supprimee`;
+      return `${subject} a été supprimé(e)`;
     default:
       return '';
   }
