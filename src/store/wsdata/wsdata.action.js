@@ -7,6 +7,7 @@ import env from '../../env';
 
 const crudEvents = (modelName: string) => ({
   created: `CREATE_${modelName}`,
+  read: `READ_${modelName}`,
   updated: `EDIT_${modelName}`,
   deleted: `REMOVE_${modelName}`
 });
@@ -18,7 +19,7 @@ const EVENTS = {
   COMPANY_POPULARITY: crudEvents('COMPANYPOPULARITY')
 };
 
-export const handleWebsocketEvents = (appStore: Store, token: string) => {
+export const handleWebsocketEvents = (appStore: Store) => {
   const socket = io.connect(env.api.url);
 
   socket.on('connect', () =>

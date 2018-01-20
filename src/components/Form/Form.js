@@ -31,11 +31,20 @@ export class Form<T> extends Component<FormProps<T>, *> {
     this.state = props.initialState;
   }
 
+  getInputValue = (event: SyntheticEvent<*>): any => {
+    const { type, checked, value, files } = event.target;
+    switch (type) {
+      case 'checkbox':
+        return checked;
+      case 'file':
+        return files[0];
+      default:
+        return value;
+    }
+  };
+
   handleInputChange = (name: string) => (event: SyntheticEvent<*>) => {
-    const value =
-      event.target.type === 'checkbox'
-        ? event.target.checked
-        : event.target.value;
+    const value = this.getInputValue(event);
     this.setState({
       [name]: value
     });
@@ -46,7 +55,10 @@ export class Form<T> extends Component<FormProps<T>, *> {
       inputDescription.isValid &&
       !inputDescription.isValid(this.state[inputDescription.id]);
     return (
-      <form style={{ display: 'flex', flexFlow: 'column wrap', padding: 20 }}>
+      <form
+        style={{ display: 'flex', flexFlow: 'column wrap', padding: 20 }}
+        encType="multipart/form-data"
+      >
         {filter(compose(not, propEq('isFiltered', true)))(
           this.props.inputs
         ).map((inputDescription: InputDescription) => (
@@ -59,7 +71,7 @@ export class Form<T> extends Component<FormProps<T>, *> {
             <FormInput
               {...inputDescription}
               handleInputChange={this.handleInputChange}
-              value={this.state[inputDescription.id]}
+              value={this.state[inputDescription.id] || ''}
               selectOptions={
                 this.props.selectOptions &&
                 this.props.selectOptions[inputDescription.id]

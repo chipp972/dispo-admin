@@ -4,8 +4,12 @@ import { Header } from './Header';
 import { toggleMenu } from '../../store/adminui/adminui.action';
 
 const mapStateToProps = (state, ownProps) => ({
-  isAuthenticated: state.authentication.isAuthenticated,
-  title: "Panneau d'administration"
+  isAuthenticated:
+    state.authentication.isAdminAuthenticated ||
+    state.authentication.isUserAuthenticated,
+  title: state.authentication.isAdminAuthenticated
+    ? "Panneau d'administration"
+    : 'Dispo'
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

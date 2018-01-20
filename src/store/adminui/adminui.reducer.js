@@ -30,6 +30,13 @@ export const adminuiReducer = (
         currentOpenDialog: DIALOG_ID.none,
         dialogContent: undefined
       };
+    case ACTION_TYPE.OPEN_REGISTER_DIALOG:
+      return {
+        ...state,
+        currentTabIndex: 0,
+        currentTabId: TAB_ID.user,
+        currentOpenDialog: DIALOG_ID.create,
+      };
     case ACTION_TYPE.CHANGE_TAB:
       const { index, maxTab } = action.payload;
       const correctIndex = index < 0 ? maxTab - 1 : index % maxTab;

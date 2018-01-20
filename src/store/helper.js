@@ -5,3 +5,4 @@ export const createAsyncActionType = (actionName: string) => ({
   FAILURE: `${actionName}_FAILURE`,
   SUCCESS: `${actionName}_SUCCESS`
 });
+

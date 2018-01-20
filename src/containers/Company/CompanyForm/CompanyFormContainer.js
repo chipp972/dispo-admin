@@ -6,6 +6,7 @@ import { closeDialog } from '../../../store/adminui/adminui.action';
 import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 
 const mapStateToProps = (state, ownProps) => ({
+  isUserAuthenticated: state.authentication.isUserAuthenticated,
   companyTypeList: state.apidata.companytype.list,
   userList: state.apidata.user.list,
   initialState: state.adminui.dialogContent,

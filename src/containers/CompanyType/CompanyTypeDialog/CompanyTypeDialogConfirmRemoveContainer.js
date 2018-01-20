@@ -8,8 +8,8 @@ import { DIALOG_ID, TAB_ID } from '../../../store/adminui/adminui.constant';
 
 const mapStateToProps = (state, ownProps) => ({
   title: 'ATTENTION',
-  contentText: `Etes-vous sur de vouloir supprimer ce type d'entreprise ?
-  Les entreprises qui utilisent ce type risque d'etre supprime`,
+  contentText: `Êtes-vous sûr de vouloir supprimer ce type d'entreprise ?
+  Les entreprises qui utilisent ce type seront supprimées !`,
   dialogContent: state.adminui.dialogContent,
   isDialogOpen:
     state.adminui.currentOpenDialog === DIALOG_ID.delete &&
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   confirmAction: (item: CompanyType) =>
-    dispatch(crud.companyType.remove(item._id)),
+    dispatch(crud.companyType.remove(item)),
   closeDialog: () => dispatch(closeDialog())
 });
 
