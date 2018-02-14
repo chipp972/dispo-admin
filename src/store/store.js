@@ -12,7 +12,7 @@ import { handleWebsocketEvents } from './wsdata/wsdata.action';
 import env from '../env';
 import type { Store } from 'redux';
 
-const isProd = env.nodeEnv === 'production';
+const isProd: boolean = env.nodeEnv === 'production';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

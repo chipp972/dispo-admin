@@ -26,7 +26,8 @@
     "react/prop-types": "off",
     "new-cap": "off",
     "no-invalid-this": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "max-len": "warn"
   },
   "settings": {
     "react": {

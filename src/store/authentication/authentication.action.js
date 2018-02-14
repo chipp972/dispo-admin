@@ -30,7 +30,7 @@ export const storeToken: ThunkAction<*> = ({
   try {
     localStorage.setItem(LOCAL_STORAGE.TOKEN, token);
     localStorage.setItem(LOCAL_STORAGE.TOKEN_ID, tokenId);
-    localStorage.setItem(LOCAL_STORAGE.EXPIRE_AT, expireAt);
+    localStorage.setItem(LOCAL_STORAGE.EXPIRE_AT, `${expireAt}`);
     localStorage.setItem(LOCAL_STORAGE.IS_ADMIN, isAdmin ? '1' : '0');
     return dispatch({ type: ACTION_TYPE.STORE_TOKEN.SUCCESS });
   } catch (error) {
@@ -121,7 +121,7 @@ export const logout = () => async (
       type: ACTION_TYPE.LOGOUT.PENDING
     });
     const { isAdminAuthenticated, isUserAuthenticated } = getState();
-    const tokenId = localStorage.getItem(LOCAL_STORAGE.TOKEN_ID);
+    const tokenId = localStorage.getItem(LOCAL_STORAGE.TOKEN_ID) || '';
     if (isAdminAuthenticated) {
       await fetcher.admin.logout(tokenId);
     } else if (isUserAuthenticated) {

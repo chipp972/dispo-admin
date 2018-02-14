@@ -1,23 +1,7 @@
 // @flow
 import io from 'socket.io-client';
 import { Store } from 'redux';
-//import { EVENTS } from 'dispo-api';
-import { forEachObjIndexed } from 'ramda';
 import env from '../../env';
-
-const crudEvents = (modelName: string) => ({
-  created: `CREATE_${modelName}`,
-  read: `READ_${modelName}`,
-  updated: `EDIT_${modelName}`,
-  deleted: `REMOVE_${modelName}`
-});
-
-const EVENTS = {
-  USER: crudEvents('USER'),
-  COMPANY: crudEvents('COMPANY'),
-  COMPANY_TYPE: crudEvents('COMPANYTYPE'),
-  COMPANY_POPULARITY: crudEvents('COMPANYPOPULARITY')
-};
 
 export const handleWebsocketEvents = (appStore: Store) => {
   const socket = io.connect(env.api.url);
@@ -34,17 +18,38 @@ export const handleWebsocketEvents = (appStore: Store) => {
     })
   );
 
-  const dispatchWebsocketEvent = (event, key) => {
+  const dispatchWebsocketEvent = (event: string, actionLabel: string) => {
     socket.on(event, (payload: any) =>
       appStore.dispatch({
-        type: `${event}_SUCCESS`,
+        type: `${actionLabel}_SUCCESS`,
         payload
       })
     );
   };
 
-  forEachObjIndexed(dispatchWebsocketEvent, EVENTS.USER);
-  forEachObjIndexed(dispatchWebsocketEvent, EVENTS.COMPANY);
-  forEachObjIndexed(dispatchWebsocketEvent, EVENTS.COMPANY_TYPE);
-  forEachObjIndexed(dispatchWebsocketEvent, EVENTS.COMPANY_POPULARITY);
+  const toActionType = (model: string, operation: string): string => {
+    const modelConverter = {
+      user: 'USER',
+      company: 'COMPANY',
+      companyType: 'COMPANYTYPE',
+      companyPopularity: 'COMPANYPOPULARITY'
+    };
+    const operationConverter = {
+      created: 'CREATE',
+      updated: 'EDIT',
+      removed: 'REMOVE'
+    };
+    return `${operationConverter[operation]}_${modelConverter[model]}`;
+  };
+
+  ['user', 'company', 'companyType', 'companyPopularity'].forEach(
+    (model: string) => {
+      ['created', 'updated', 'removed'].forEach((operation: string) => {
+        dispatchWebsocketEvent(
+          `${model}:${operation}`,
+          toActionType(model, operation)
+        );
+      });
+    }
+  );
 };
