@@ -2,6 +2,7 @@
 import type { Company, User, CompanyType, CompanyPopularity } from 'dispo-api';
 
 export type APIDataState = {
+  isWebsocketInitialised: boolean,
   [string]: {
     list: any[],
     byId?: { [string]: any }

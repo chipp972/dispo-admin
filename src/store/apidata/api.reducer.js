@@ -7,7 +7,7 @@ const initialState: APIDataState = {
   company: { list: [], byId: {} },
   companytype: { list: [], byId: {} },
   user: { list: [], byId: {} },
-  companyPopularity: { list: [], byId: {} }
+  companypopularity: { list: [], byId: {} }
 };
 
 export const apiDataReducer = (

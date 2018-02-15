@@ -49,33 +49,18 @@ export type CrudAPI = {
   companyPopularity: CrudOperations<CompanyPopularityData, CompanyPopularity>
 };
 
+const generateCrudModel = (dataName: string) => ({
+    getAll: generateCrudAction('getAll', dataName),
+    get: generateCrudAction('get', dataName),
+    read: generateCrudAction('read', dataName),
+    create: generateCrudAction('create', dataName),
+    edit: generateCrudAction('edit', dataName),
+    remove: generateCrudAction('remove', dataName),
+});
+
 export const crud: CrudAPI = {
-  company: {
-    getAll: generateCrudAction('getAll', 'company'),
-    get: generateCrudAction('get', 'company'),
-    create: generateCrudAction('create', 'company'),
-    edit: generateCrudAction('edit', 'company'),
-    remove: generateCrudAction('remove', 'company')
-  },
-  companyType: {
-    getAll: generateCrudAction('getAll', 'companyType'),
-    get: generateCrudAction('get', 'companyType'),
-    create: generateCrudAction('create', 'companyType'),
-    edit: generateCrudAction('edit', 'companyType'),
-    remove: generateCrudAction('remove', 'companyType')
-  },
-  companyPopularity: {
-    getAll: generateCrudAction('getAll', 'companyPopularity'),
-    get: generateCrudAction('get', 'companyPopularity'),
-    create: generateCrudAction('create', 'companyPopularity'),
-    edit: generateCrudAction('edit', 'companyPopularity'),
-    remove: generateCrudAction('remove', 'companyPopularity')
-  },
-  user: {
-    getAll: generateCrudAction('getAll', 'user'),
-    get: generateCrudAction('get', 'user'),
-    create: generateCrudAction('create', 'user'),
-    edit: generateCrudAction('edit', 'user'),
-    remove: generateCrudAction('remove', 'user')
-  }
+  company: generateCrudModel('company'),
+  companyType: generateCrudModel('companyType'),
+  companyPopularity: generateCrudModel('companyPopularity'),
+  user: generateCrudModel('user'),
 };

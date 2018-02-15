@@ -11,14 +11,7 @@ type MenuProps = {
 };
 
 export const Menu = (props: MenuProps) => {
-  if (props.isAdminAuthenticated) {
-    return (
-      <Drawer open={props.isMenuOpen} onRequestClose={() => props.toggleMenu()}>
-        <Divider />
-        <Button onClick={() => props.logout()}>Deconnexion</Button>
-      </Drawer>
-    );
-  } else if (props.isUserAuthenticated) {
+  if (props.isAdminAuthenticated || props.isUserAuthenticated) {
     return (
       <Drawer open={props.isMenuOpen} onRequestClose={() => props.toggleMenu()}>
         <Divider />

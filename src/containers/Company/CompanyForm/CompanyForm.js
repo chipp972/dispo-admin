@@ -5,6 +5,7 @@ import type { Company, CompanyData, CompanyType, User } from 'dispo-api';
 
 type CompanyFormProps = {
   isUserAuthenticated: boolean,
+  userId: string,
   companyTypeList: CompanyType[],
   userList: User[],
   isUpdate: boolean,
@@ -15,8 +16,8 @@ type CompanyFormProps = {
   initialState?: Company
 };
 
-export const initialState: CompanyData = {
-  owner: '',
+export const initialState= (userId?: string): CompanyData => ({
+  owner: userId || '',
   name: 'company01',
   type: '',
   siret: '1234561o901234',
@@ -24,11 +25,11 @@ export const initialState: CompanyData = {
     'https://assets-cdn.github.com/images/modules/open_graph/github-mark.png',
   address: '6 rue du havre 75009 Paris',
   phoneNumber: '0698310966'
-};
+});
 
 export const CompanyForm = (props: CompanyFormProps) => (
   <Form
-    initialState={props.initialState || initialState}
+    initialState={props.initialState || initialState(props.userId)}
     inputs={[
       {
         id: 'owner',

@@ -38,7 +38,7 @@ export const store = createStore(
  */
 const initAPIData = (appStore: Store) => {
   const { authentication } = appStore.getState();
-  const { isAdminAuthenticated, isUserAuthenticated} = authentication;
+  const { isAdminAuthenticated, isUserAuthenticated } = authentication;
   if (!(isAdminAuthenticated || isUserAuthenticated)) return false;
 
   // get all data from the api
