@@ -192,11 +192,12 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-another-express-crud@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/another-express-crud/-/another-express-crud-1.1.0.tgz#f66b1a3707ec67f608f56c0c3702a51c98b7ae11"
+another-express-crud@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/another-express-crud/-/another-express-crud-1.2.0.tgz#29ecb441d7261049afbe8a5658dac618dac0b8d2"
   dependencies:
     babel-runtime "6.26.0"
+    customizable-error "0.1.3"
     express "4.16.2"
 
 ansi-align@^2.0.0:
@@ -267,8 +268,8 @@ are-we-there-yet@~1.1.2:
     readable-stream "^2.0.6"
 
 argparse@^1.0.7:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.9.tgz#73d83bc263f86e97f8cc4f6bae1b0e90a7d22c86"
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
   dependencies:
     sprintf-js "~1.0.2"
 
@@ -1646,7 +1647,7 @@ chalk@1.1.3, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.1.tgz#523fe2678aec7b04e8041909292fe8b17059b796"
   dependencies:
@@ -1693,8 +1694,8 @@ chokidar@^1.6.0, chokidar@^1.6.1, chokidar@^1.7.0:
     fsevents "^1.0.0"
 
 chokidar@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.1.tgz#6e67e9998fe10e8f651e975ca62460456ff8e297"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.2.tgz#4dc65139eeb2714977735b6a35d06e97b494dfd7"
   dependencies:
     anymatch "^2.0.0"
     async-each "^1.0.0"
@@ -1706,7 +1707,7 @@ chokidar@^2.0.0:
     normalize-path "^2.1.1"
     path-is-absolute "^1.0.0"
     readdirp "^2.0.0"
-    upath "1.0.0"
+    upath "^1.0.0"
   optionalDependencies:
     fsevents "^1.0.0"
 
@@ -1792,12 +1793,12 @@ clone@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.3.tgz#298d7e2231660f40c003c2ed3140decf3f53085f"
 
-cloudinary@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.9.1.tgz#6eb060a5cfb5084c4c984e4253cc15657b13d9b8"
+cloudinary@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.10.0.tgz#4dfaeeebf932fe98e61d2f7e4d2391c39e76bbf8"
   dependencies:
-    lodash "3.10.x"
-    q "1.4.x"
+    lodash "^4.17.4"
+    q "^1.5.1"
 
 co@^4.6.0:
   version "4.6.0"
@@ -2074,9 +2075,9 @@ cross-spawn@5.1.0, cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-crud-mongoose-connector@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/crud-mongoose-connector/-/crud-mongoose-connector-0.2.0.tgz#8b8b58980168cd2164ca56f359a96ffa3cf72564"
+crud-mongoose-connector@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/crud-mongoose-connector/-/crud-mongoose-connector-0.2.1.tgz#74db61dbbca425aefea721626ed1ec823ac8c145"
   dependencies:
     mongoose "5.0.3"
 
@@ -2226,9 +2227,9 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-customizable-error@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/customizable-error/-/customizable-error-0.1.1.tgz#3417dbbd0ad7cfda61a4a5e222804a67cbad125e"
+customizable-error@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/customizable-error/-/customizable-error-0.1.3.tgz#05c9dd94021855398d349c0e0cd19ccc6d929281"
   dependencies:
     tslib "1.9.0"
 
@@ -2481,11 +2482,11 @@ diffie-hellman@^5.0.0:
     randombytes "^2.0.0"
 
 "dispo-api@git+https://d09a8666eaa2b3a3f64d9efb69c7cc2e29c483d5@github.com/chipp972/dispo-api.git":
-  version "2.0.1"
-  resolved "git+https://d09a8666eaa2b3a3f64d9efb69c7cc2e29c483d5@github.com/chipp972/dispo-api.git#f18041736676e10be317f1d1a0114e58a8387482"
+  version "2.0.2"
+  resolved "git+https://d09a8666eaa2b3a3f64d9efb69c7cc2e29c483d5@github.com/chipp972/dispo-api.git#0c66e3fb2e85763a8c01cfda5187c2b061d8627c"
   dependencies:
     "@google/maps" "0.4.5"
-    another-express-crud "1.1.0"
+    another-express-crud "1.2.0"
     babel-cli "^6.26.0"
     babel-core "^6.26.0"
     babel-plugin-transform-builtin-extend "1.1.2"
@@ -2497,11 +2498,10 @@ diffie-hellman@^5.0.0:
     babel-runtime "^6.26.0"
     bcrypt "1.0.3"
     body-parser "1.18.2"
-    cloudinary "1.9.1"
+    cloudinary "1.10.0"
     cors "2.8.4"
-    crud-mongoose-connector "0.2.0"
-    customizable-error "0.1.1"
-    eventemitter3 "3.0.1"
+    crud-mongoose-connector "0.2.1"
+    customizable-error "0.1.3"
     express "4.16.2"
     express-form-data "2.0.1"
     flow-copy-source "1.3.0"
@@ -2521,7 +2521,7 @@ diffie-hellman@^5.0.0:
     passport-jwt "3.0.1"
     ramda "0.25.0"
     shortid "2.2.8"
-    singleton-module-registry "0.1.0"
+    singleton-module-registry "0.1.1"
     socket.io "2.0.4"
     socket.io-client "2.0.4"
     winston "2.4.0"
@@ -2760,8 +2760,8 @@ entities@~1.1.1:
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
 errno@^0.1.3, errno@^0.1.4:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.6.tgz#c386ce8a6283f14fc09563b71560908c9bf53026"
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
   dependencies:
     prr "~1.0.1"
 
@@ -5637,6 +5637,10 @@ lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
+lodash.endswith@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/lodash.endswith/-/lodash.endswith-4.2.1.tgz#fed59ac1738ed3e236edd7064ec456448b37bc09"
+
 lodash.get@4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -5649,7 +5653,7 @@ lodash.isboolean@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
 
-lodash.isfunction@^3.0.6:
+lodash.isfunction@^3.0.6, lodash.isfunction@^3.0.8:
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
 
@@ -5685,6 +5689,10 @@ lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
 
+lodash.startswith@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
+
 lodash.template@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
@@ -5705,10 +5713,6 @@ lodash.transform@^4.6.0:
 lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
-
-lodash@3.10.x, lodash@3.x:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
 "lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.5"
@@ -7122,12 +7126,12 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     supports-color "^3.2.3"
 
 postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.13:
-  version "6.0.17"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.17.tgz#e259a051ca513f81e9afd0c21f7f82eda50c65c5"
+  version "6.0.18"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.18.tgz#370f5f44d47f3a205f0eb2f6262bbf202df2a80e"
   dependencies:
-    chalk "^2.3.0"
+    chalk "^2.3.1"
     source-map "^0.6.1"
-    supports-color "^5.1.0"
+    supports-color "^5.2.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -7251,11 +7255,7 @@ punycode@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
 
-q@1.4.x:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
-
-q@^1.1.2:
+q@^1.1.2, q@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
 
@@ -8212,9 +8212,9 @@ simpler-debounce@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/simpler-debounce/-/simpler-debounce-1.0.0.tgz#3e1caaedf75b4e93c45b95060192ba2f8bbbe136"
 
-singleton-module-registry@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/singleton-module-registry/-/singleton-module-registry-0.1.0.tgz#d12a682a7e52dca21a7c36a1af9cf89a96745483"
+singleton-module-registry@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/singleton-module-registry/-/singleton-module-registry-0.1.1.tgz#f2165caa7aa0430f0e9e9ba68fa57070457d3039"
   dependencies:
     eventemitter3 "3.0.1"
     tslib "1.9.0"
@@ -8639,7 +8639,7 @@ supports-color@^4.2.1:
   dependencies:
     has-flag "^2.0.0"
 
-supports-color@^5.1.0, supports-color@^5.2.0:
+supports-color@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.2.0.tgz#b0d5333b1184dd3666cbe5aa0b45c5ac7ac17a4a"
   dependencies:
@@ -8997,10 +8997,6 @@ unbzip2-stream@^1.0.9:
     buffer "^3.0.1"
     through "^2.3.6"
 
-underscore.string@2.3.x:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-2.3.3.tgz#71c08bf6b428b1133f37e78fa3a21c82f7329b0d"
-
 underscore@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
@@ -9053,12 +9049,14 @@ unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
 
-upath@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.0.tgz#b4706b9461ca8473adf89133d235689ca17f3656"
+upath@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.2.tgz#80aaae5395abc5fd402933ae2f58694f0860204c"
   dependencies:
-    lodash "3.x"
-    underscore.string "2.3.x"
+    lodash.endswith "^4.2.1"
+    lodash.isfunction "^3.0.8"
+    lodash.isstring "^4.0.1"
+    lodash.startswith "^4.2.1"
 
 update-notifier@^2.3.0:
   version "2.3.0"
